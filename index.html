@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>Magazzino Centrale</title>
+<title>Magazzino Centrale v1.1.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -693,6 +693,252 @@
 .topbar-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 
+
+
+/* ════ Fix critico layout L2 ════ */
+#layer-l2.mgc-active {
+  display: block !important;
+  height: 100vh;
+  overflow: hidden;
+}
+#layer-l2 #app {
+  display: none;
+}
+#layer-l2 #app.active {
+  display: flex !important;
+  flex-direction: row !important;
+  height: 100vh !important;
+  overflow: hidden;
+  width: 100%;
+}
+#layer-l2 #app.active .sidebar {
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+#layer-l2 #app.active .main {
+  flex: 1 !important;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+#layer-l2 #login-screen {
+  display: none !important;
+}
+
+/* Fix topbar L2: su desktop è nascosto (usa sidebar) */
+#layer-l2 .topbar {
+  display: none;
+}
+@media(max-width: 767px) {
+  #layer-l2 .topbar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  #layer-l2 .sidebar {
+    display: none !important;
+  }
+  #layer-l2 #app.active {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  #layer-l2 #app.active .main {
+    height: auto !important;
+    overflow-y: visible;
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+  #layer-l2 .bottom-nav {
+    display: flex !important;
+  }
+}
+
+
+
+
+
+/* Fix sidebar L2 desktop */
+@media(min-width: 768px) {
+  #layer-l2.mgc-active .sidebar {
+    display: flex !important;
+    width: 248px;
+    flex-shrink: 0;
+    height: 100vh;
+  }
+  #layer-l2.mgc-active .topbar {
+    display: none !important;
+  }
+  #layer-l2.mgc-active .bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Fix pagine L2 */
+#layer-l2.mgc-active .page {
+  display: none;
+}
+#layer-l2.mgc-active .page.active {
+  display: block !important;
+  min-height: 200px !important;
+}
+
+
+/* ════ Fix CSS L0 — variabili e layout ════ */
+#layer-l0 {
+  /* Variabili design system L0 */
+  --bg: #F6F7F9;
+  --surface: #FFFFFF;
+  --surface2: #F0F2F5;
+  --border: #E5E8ED;
+  --text: #1E2733;
+  --text2: #6B7685;
+  --text3: #9AA3AF;
+  --blu: #2563EB;
+  --blu-bg: rgba(37,99,235,.1);
+  --verde: #16A34A;
+  --verde-bg: rgba(22,163,74,.1);
+  --rosso: #DC2626;
+  --rosso-bg: rgba(220,38,38,.1);
+  --ambra: #D97706;
+  --ambra-bg: rgba(217,119,6,.1);
+  --mono: 'Roboto Mono', monospace;
+  --sans: 'Inter', sans-serif;
+  --serif: 'Source Serif 4', Georgia, serif;
+}
+
+/* Fix layout statistiche L0 */
+#layer-l0 .stat-row {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+#layer-l0 .stat-box {
+  background: #fff;
+  border: 1px solid #E5E8ED;
+  border-radius: 10px;
+  padding: 14px 16px;
+  flex: 1;
+  min-width: 130px;
+  text-align: left;
+}
+#layer-l0 .stat-box .lbl {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #9AA3AF;
+  margin-bottom: 4px;
+}
+#layer-l0 .stat-box .val {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1E2733;
+  line-height: 1.1;
+  font-family: 'Inter', sans-serif;
+}
+#layer-l0 .stat-box .sub {
+  font-size: 11px;
+  color: #6B7685;
+  margin-top: 3px;
+}
+
+/* Fix card L0 */
+#layer-l0 .card {
+  background: #fff;
+  border: 1px solid #E5E8ED;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+#layer-l0 .card-head h2, #layer-l0 .card-head h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1E2733;
+  margin-bottom: 12px;
+}
+
+/* Fix topbar L0 */
+#layer-l0 .topbar {
+  background: var(--blu-900, #10243F) !important;
+  color: #fff !important;
+}
+
+/* Fix layout principale L0 */
+#layer-l0 .layout {
+  display: flex;
+  min-height: calc(100vh - 56px);
+}
+#layer-l0 .main {
+  flex: 1;
+  padding: 16px;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  background: #F6F7F9;
+  overflow-y: auto;
+  min-width: 0;
+}
+#layer-l0 .page { display: none; }
+#layer-l0 .page.active { display: block !important; }
+
+/* Fix bottom nav L0 */
+#layer-l0 .mobile-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid #E5E8ED;
+  display: flex;
+  padding: 6px 0;
+  padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 100;
+}
+#layer-l0 .mn-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #9AA3AF;
+  padding: 4px 2px;
+  font-family: 'Inter', sans-serif;
+}
+#layer-l0 .mn-item svg { width: 20px; height: 20px; display: block; }
+#layer-l0 .mn-item span { font-size: 10px; font-weight: 500; }
+#layer-l0 .mn-item.active { color: #2563EB; }
+
+/* Dev badge */
+#layer-l0 .dev-badge {
+  background: #6e40c9;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+}
+#layer-l0 .lv-badge {
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* Fix testo centrato (problema visto nello screenshot) */
+#layer-l0 .main * {
+  text-align: left;
+}
+#layer-l0 .stat-box * {
+  text-align: left !important;
+}
+
 /* ════ MGC Layer System ════ */
 .mgc-layer { display: none !important; }
 #layer-login.mgc-active {
@@ -708,7 +954,12 @@
 }
 #layer-l0.mgc-active,#layer-l1.mgc-active,
 #layer-l2.mgc-active,#layer-l3.mgc-active,
-#layer-l4.mgc-active { display: block !important; }
+#layer-l4.mgc-active { 
+  display: block !important;
+  width: 100vw !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
 
 </style>
 </head>
@@ -721,6 +972,7 @@
     </div>
     <div style="font-family:'Source Serif 4',Georgia,serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.02em;">MAGAZZINO CENTRALE</div>
     <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:5px;">Sistema Gestione Fornitori</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:4px;font-family:'Roboto Mono',monospace;">v1.1.0 — 2026-07-26</div>
   </div>
   <div style="background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.15);border-radius:18px;padding:28px 24px 30px;">
     <div id="login-error-mgc" style="display:none;background:rgba(168,49,31,.3);border:1.5px solid rgba(168,49,31,.5);color:#FCA5A5;border-radius:10px;padding:11px 14px;font-size:13px;font-weight:500;margin-bottom:18px;"></div>
@@ -1476,6 +1728,55 @@ document.getElementById('mgc-btn').addEventListener('click',mgcLogin);
 document.getElementById('mgc-u').addEventListener('keydown',function(e){if(e.key==='Enter')mgcLogin();});
 document.getElementById('mgc-p').addEventListener('keydown',function(e){if(e.key==='Enter')mgcLogin();});
 </script>
+<script>
+
+// ════════════════════════════════════════════════════════════
+// MAGAZZINO CENTRALE v1.1.0 — 2026-07-26
+// Init dati demo: caricati automaticamente al primo avvio
+// ════════════════════════════════════════════════════════════
+(function initDemoData() {
+  var KEY_L2  = 'mgc-l2-v1';   // usata dal L2
+  var KEY_APP = 'mgc-app-v1';  // usata da L0, L1, L3, L4
+  var VERSION = '1.1.0';
+
+  // Carica solo se non ci sono dati o se la versione è vecchia
+  var existing = localStorage.getItem(KEY_L2);
+  var existingApp = localStorage.getItem(KEY_APP);
+  
+  // Controlla se i dati sono già presenti e aggiornati
+  try {
+    if (existing) {
+      var d = JSON.parse(existing);
+      if (d.fornitori && d.fornitori.length === 25 && d._version === VERSION) {
+        // Dati già presenti e aggiornati — sincronizza KEY_APP se necessario
+        if (!existingApp) {
+          localStorage.setItem(KEY_APP, existing);
+        }
+        return;
+      }
+    }
+  } catch(e) {}
+
+  // Carica i dati demo
+  var DEMO = {"fornitori":[{"id":"forn01","nome":"Logistica Adriatica S.r.l.","referente":"Marco Verdi","telefono":"340 1000000","email":"logistica.adriatica.s.r.l@demo.it","password":"f01pass"},{"id":"forn02","nome":"Trasporti Bianchi & Figli","referente":"Giulia Neri","telefono":"341 1000137","email":"trasporti.bianchi.figli@demo.it","password":"f02pass"},{"id":"forn03","nome":"Eurofresh Distribuzione","referente":"Luca Russo","telefono":"342 1000274","email":"eurofresh.distribuzione@demo.it","password":"f03pass"},{"id":"forn04","nome":"Cargo Veneto S.p.A.","referente":"Sara Ferrari","telefono":"343 1000411","email":"cargo.veneto.s.p.a@demo.it","password":"f04pass"},{"id":"forn05","nome":"Alimentari del Sole S.r.l.","referente":"Davide Colombo","telefono":"344 1000548","email":"alimentari.del.sole.s.r.l@demo.it","password":"f05pass"},{"id":"forn06","nome":"Frigo Trans Italia","referente":"Elena Verdi","telefono":"345 1000685","email":"frigo.trans.italia@demo.it","password":"f06pass"},{"id":"forn07","nome":"Mercurio Spedizioni","referente":"Paolo Neri","telefono":"346 1000822","email":"mercurio.spedizioni@demo.it","password":"f07pass"},{"id":"forn08","nome":"Conserve Po Valley","referente":"Chiara Russo","telefono":"347 1000959","email":"conserve.po.valley@demo.it","password":"f08pass"},{"id":"forn09","nome":"Lattiero Caseario Rossi","referente":"Marco Ferrari","telefono":"348 1001096","email":"lattiero.caseario.rossi@demo.it","password":"f09pass"},{"id":"forn10","nome":"Tessile Nord S.r.l.","referente":"Giulia Colombo","telefono":"349 1001233","email":"tessile.nord.s.r.l@demo.it","password":"f10pass"},{"id":"forn11","nome":"Ferramenta Universale","referente":"Luca Verdi","telefono":"350 1001370","email":"ferramenta.universale@demo.it","password":"f11pass"},{"id":"forn12","nome":"Vini e Distillati Colle","referente":"Sara Neri","telefono":"351 1001507","email":"vini.e.distillati.colle@demo.it","password":"f12pass"},{"id":"forn13","nome":"Ortofrutta Mediterranea","referente":"Davide Russo","telefono":"352 1001644","email":"ortofrutta.mediterranea@demo.it","password":"f13pass"},{"id":"forn14","nome":"Plast Pack Imballaggi","referente":"Elena Ferrari","telefono":"353 1001781","email":"plast.pack.imballaggi@demo.it","password":"f14pass"},{"id":"forn15","nome":"Carta e Cartoni Esposito","referente":"Paolo Colombo","telefono":"354 1001918","email":"carta.e.cartoni.esposito@demo.it","password":"f15pass"},{"id":"forn16","nome":"Surgelati Stella Polare","referente":"Chiara Verdi","telefono":"355 1002055","email":"surgelati.stella.polare@demo.it","password":"f16pass"},{"id":"forn17","nome":"Bevande Group Italia","referente":"Marco Neri","telefono":"356 1002192","email":"bevande.group.italia@demo.it","password":"f17pass"},{"id":"forn18","nome":"Macelleria Industriale Tosi","referente":"Giulia Russo","telefono":"357 1002329","email":"macelleria.industriale.tosi@demo.it","password":"f18pass"},{"id":"forn19","nome":"Forno Centrale Distribuzione","referente":"Luca Ferrari","telefono":"358 1002466","email":"forno.centrale.distribuzione@demo.it","password":"f19pass"},{"id":"forn20","nome":"Chimica Verde S.r.l.","referente":"Sara Colombo","telefono":"359 1002603","email":"chimica.verde.s.r.l@demo.it","password":"f20pass"},{"id":"forn21","nome":"Elettroforniture Marini","referente":"Davide Verdi","telefono":"360 1002740","email":"elettroforniture.marini@demo.it","password":"f21pass"},{"id":"forn22","nome":"Pelletteria Conceria Lux","referente":"Elena Neri","telefono":"361 1002877","email":"pelletteria.conceria.lux@demo.it","password":"f22pass"},{"id":"forn23","nome":"Carni Pregiate Lombarde","referente":"Paolo Russo","telefono":"362 1003014","email":"carni.pregiate.lombarde@demo.it","password":"f23pass"},{"id":"forn24","nome":"Detergenza Professionale","referente":"Chiara Ferrari","telefono":"363 1003151","email":"detergenza.professionale@demo.it","password":"f24pass"},{"id":"forn25","nome":"Idrotermosanitaria Bassi","referente":"Marco Colombo","telefono":"364 1003288","email":"idrotermosanitaria.bassi@demo.it","password":"f25pass"}],"appuntamenti":[{"id":"appthv3a3z","fornitoreId":"forn09","data":"2026-07-16","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appdnmmjbq","fornitoreId":"forn03","data":"2026-07-16","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw5uzbik","fornitoreId":"forn02","data":"2026-07-16","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyzycwti","fornitoreId":"forn08","data":"2026-07-16","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuy41ibl","fornitoreId":"forn07","data":"2026-07-16","ora":"08:00","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph9sdbdw","fornitoreId":"forn07","data":"2026-07-17","ora":"08:00","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appvqjt7ye","fornitoreId":"forn08","data":"2026-07-17","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkfazz81","fornitoreId":"forn05","data":"2026-07-17","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxvf1t2t","fornitoreId":"forn02","data":"2026-07-17","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app93iiuc0","fornitoreId":"forn01","data":"2026-07-17","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8fsv871","fornitoreId":"forn14","data":"2026-07-17","ora":"16:05","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxpseimv","fornitoreId":"forn18","data":"2026-07-17","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appciyhe7u","fornitoreId":"forn09","data":"2026-07-17","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxmo5bxx","fornitoreId":"forn15","data":"2026-07-17","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apptb94874","fornitoreId":"forn02","data":"2026-07-20","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appfao72kz","fornitoreId":"forn05","data":"2026-07-20","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appghc0clb","fornitoreId":"forn11","data":"2026-07-20","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcgvyie6","fornitoreId":"forn12","data":"2026-07-20","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuljylje","fornitoreId":"forn14","data":"2026-07-20","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcq99chj","fornitoreId":"forn10","data":"2026-07-20","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appf4zw9xa","fornitoreId":"forn03","data":"2026-07-20","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appj60fkhm","fornitoreId":"forn08","data":"2026-07-20","ora":"14:30","oraOriginale":"14:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6bw3bme","fornitoreId":"forn09","data":"2026-07-20","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppac56t4","fornitoreId":"forn06","data":"2026-07-20","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6246hid","fornitoreId":"forn07","data":"2026-07-20","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7if2gog","fornitoreId":"forn18","data":"2026-07-20","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ixokc1","fornitoreId":"forn08","data":"2026-07-21","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appt7e8g8j","fornitoreId":"forn10","data":"2026-07-21","ora":"12:00","oraOriginale":"12:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9e6gbps","fornitoreId":"forn14","data":"2026-07-21","ora":"08:00","oraOriginale":"08:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyncxll4","fornitoreId":"forn13","data":"2026-07-21","ora":"16:00","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applztgxn0","fornitoreId":"forn05","data":"2026-07-21","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph2vlpys","fornitoreId":"forn09","data":"2026-07-21","ora":"10:00","oraOriginale":"10:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxwd8il3","fornitoreId":"forn18","data":"2026-07-21","ora":"09:40","oraOriginale":"09:30","tipo":"carico","ritardoMin":10,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5uznofy","fornitoreId":"forn16","data":"2026-07-21","ora":"15:35","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8sbi4q2","fornitoreId":"forn02","data":"2026-07-21","ora":"10:50","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":20,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6wzs3t6","fornitoreId":"forn17","data":"2026-07-21","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyzcotoh","fornitoreId":"forn09","data":"2026-07-22","ora":"11:05","oraOriginale":"11:00","tipo":"carico","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appur7ko64","fornitoreId":"forn11","data":"2026-07-22","ora":"08:20","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":20,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apphhpbmyo","fornitoreId":"forn14","data":"2026-07-22","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6vxdp5g","fornitoreId":"forn03","data":"2026-07-22","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn13jcat","fornitoreId":"forn10","data":"2026-07-22","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbbi4wir","fornitoreId":"forn07","data":"2026-07-22","ora":"09:45","oraOriginale":"09:30","tipo":"carico","ritardoMin":15,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgv0e38d","fornitoreId":"forn13","data":"2026-07-22","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7hv3izk","fornitoreId":"forn18","data":"2026-07-22","ora":"16:00","oraOriginale":"16:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbtxcxap","fornitoreId":"forn02","data":"2026-07-22","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appi7kq1uy","fornitoreId":"forn12","data":"2026-07-23","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appmjkv5us","fornitoreId":"forn08","data":"2026-07-23","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxr2dhyl","fornitoreId":"forn10","data":"2026-07-23","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9tmqliz","fornitoreId":"forn09","data":"2026-07-23","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appghr09sk","fornitoreId":"forn16","data":"2026-07-23","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appze5r5uq","fornitoreId":"forn05","data":"2026-07-23","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ecruyf","fornitoreId":"forn03","data":"2026-07-23","ora":"08:30","oraOriginale":"08:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuovw1n6","fornitoreId":"forn07","data":"2026-07-23","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appzzqy72w","fornitoreId":"forn10","data":"2026-07-24","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx63cfl0","fornitoreId":"forn04","data":"2026-07-24","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkojtpv6","fornitoreId":"forn06","data":"2026-07-24","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4u89yjb","fornitoreId":"forn13","data":"2026-07-24","ora":"08:45","oraOriginale":"08:30","tipo":"carico","ritardoMin":15,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appk9p38qo","fornitoreId":"forn11","data":"2026-07-24","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyk83tql","fornitoreId":"forn02","data":"2026-07-24","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appa5qbswr","fornitoreId":"forn12","data":"2026-07-24","ora":"16:30","oraOriginale":"16:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7pze9vi","fornitoreId":"forn01","data":"2026-07-24","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4e8xf7k","fornitoreId":"forn17","data":"2026-07-24","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appitn7s55","fornitoreId":"forn15","data":"2026-07-24","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn759in4","fornitoreId":"forn06","data":"2026-07-27","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app3nx39rb","fornitoreId":"forn07","data":"2026-07-27","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4d6af58","fornitoreId":"forn12","data":"2026-07-27","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx444nlz","fornitoreId":"forn05","data":"2026-07-27","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw790pdw","fornitoreId":"forn13","data":"2026-07-27","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appblcmpio","fornitoreId":"forn11","data":"2026-07-27","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5wi6fqj","fornitoreId":"forn03","data":"2026-07-27","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppmvxpj4","fornitoreId":"forn09","data":"2026-07-27","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appmkza3oa","fornitoreId":"forn16","data":"2026-07-27","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app0361i2h","fornitoreId":"forn21","data":"2026-07-27","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app25nsjf6","fornitoreId":"forn12","data":"2026-07-28","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe8f8409","fornitoreId":"forn05","data":"2026-07-28","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appatqyyv3","fornitoreId":"forn10","data":"2026-07-28","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw7lvxwq","fornitoreId":"forn02","data":"2026-07-28","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8krd5eq","fornitoreId":"forn15","data":"2026-07-28","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appv05x4w7","fornitoreId":"forn17","data":"2026-07-28","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4dyt9mo","fornitoreId":"forn06","data":"2026-07-28","ora":"08:30","oraOriginale":"08:30","tipo":"scarico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appx8bm92h","fornitoreId":"forn13","data":"2026-07-28","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5lf6a4f","fornitoreId":"forn16","data":"2026-07-28","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app2sds8b2","fornitoreId":"forn02","data":"2026-07-29","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appb94pdzp","fornitoreId":"forn10","data":"2026-07-29","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appjwtl9tq","fornitoreId":"forn07","data":"2026-07-29","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx5t5p5o","fornitoreId":"forn03","data":"2026-07-29","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppxnf7c3","fornitoreId":"forn11","data":"2026-07-29","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appulemx15","fornitoreId":"forn05","data":"2026-07-29","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuhxid4n","fornitoreId":"forn09","data":"2026-07-29","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appu1wyuvx","fornitoreId":"forn17","data":"2026-07-29","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applma5uof","fornitoreId":"forn01","data":"2026-07-29","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnqfll7v","fornitoreId":"forn04","data":"2026-07-29","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyjxrpj1","fornitoreId":"forn12","data":"2026-07-29","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkerpeti","fornitoreId":"forn04","data":"2026-07-30","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ba75uu","fornitoreId":"forn12","data":"2026-07-30","ora":"09:00","oraOriginale":"09:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8g8qynp","fornitoreId":"forn08","data":"2026-07-30","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applmlgses","fornitoreId":"forn09","data":"2026-07-30","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxfdjgf1","fornitoreId":"forn07","data":"2026-07-30","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app1q7uww5","fornitoreId":"forn16","data":"2026-07-30","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw2vmcqb","fornitoreId":"forn03","data":"2026-07-30","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4wsqt26","fornitoreId":"forn10","data":"2026-07-30","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprfcd6mz","fornitoreId":"forn18","data":"2026-07-30","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9svn7n1","fornitoreId":"forn05","data":"2026-07-30","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcdyk0x6","fornitoreId":"forn01","data":"2026-07-30","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7lxxezd","fornitoreId":"forn15","data":"2026-07-30","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appy30ysxp","fornitoreId":"forn23","data":"2026-07-30","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app0sx5wvf","fornitoreId":"forn02","data":"2026-07-31","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppoyipk0","fornitoreId":"forn11","data":"2026-07-31","ora":"16:00","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app26gyup1","fornitoreId":"forn10","data":"2026-07-31","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app32ejx5t","fornitoreId":"forn12","data":"2026-07-31","ora":"12:00","oraOriginale":"12:00","tipo":"scarico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appj6fp8hq","fornitoreId":"forn03","data":"2026-07-31","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnncildz","fornitoreId":"forn01","data":"2026-07-31","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app3zezqac","fornitoreId":"forn06","data":"2026-07-31","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appp1ieixw","fornitoreId":"forn16","data":"2026-07-31","ora":"09:00","oraOriginale":"09:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appsifpwio","fornitoreId":"forn15","data":"2026-07-31","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8t2sa5b","fornitoreId":"forn05","data":"2026-07-31","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app2m0w10l","fornitoreId":"forn14","data":"2026-07-31","ora":"10:30","oraOriginale":"10:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appo3rbxk5","fornitoreId":"forn01","data":"2026-08-03","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app606n9rr","fornitoreId":"forn06","data":"2026-08-03","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppp9gkdl","fornitoreId":"forn11","data":"2026-08-03","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appymb5m9j","fornitoreId":"forn10","data":"2026-08-03","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn2y8fv2","fornitoreId":"forn02","data":"2026-08-03","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbfqnpce","fornitoreId":"forn09","data":"2026-08-03","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appe0rnujj","fornitoreId":"forn12","data":"2026-08-03","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appre4q6qd","fornitoreId":"forn17","data":"2026-08-03","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"apptkkfzzg","fornitoreId":"forn13","data":"2026-08-03","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe2atn2t","fornitoreId":"forn07","data":"2026-08-03","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe3tv1es","fornitoreId":"forn08","data":"2026-08-04","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appf7i8skc","fornitoreId":"forn02","data":"2026-08-04","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apptsg7fxz","fornitoreId":"forn06","data":"2026-08-04","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appc81jhuw","fornitoreId":"forn13","data":"2026-08-04","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appr2ykccp","fornitoreId":"forn12","data":"2026-08-04","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app5l9mo1s","fornitoreId":"forn05","data":"2026-08-04","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnwi5flu","fornitoreId":"forn04","data":"2026-08-04","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprla8s8h","fornitoreId":"forn07","data":"2026-08-04","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4ykadej","fornitoreId":"forn01","data":"2026-08-04","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuhtcs1k","fornitoreId":"forn16","data":"2026-08-04","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appelrqvsl","fornitoreId":"forn07","data":"2026-08-05","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4vssrur","fornitoreId":"forn03","data":"2026-08-05","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app20yar82","fornitoreId":"forn02","data":"2026-08-05","ora":"11:30","oraOriginale":"11:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprsz1n3i","fornitoreId":"forn13","data":"2026-08-05","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applfyo175","fornitoreId":"forn16","data":"2026-08-05","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appu9rn8qt","fornitoreId":"forn01","data":"2026-08-05","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxyvgiui","fornitoreId":"forn17","data":"2026-08-05","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyrru7zk","fornitoreId":"forn09","data":"2026-08-05","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app382kkzm","fornitoreId":"forn15","data":"2026-08-05","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app3jujd0i","fornitoreId":"forn10","data":"2026-08-05","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appozd1at7","fornitoreId":"forn08","data":"2026-08-05","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8lx6dut","fornitoreId":"forn19","data":"2026-08-05","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appk9tr74q","fornitoreId":"forn10","data":"2026-08-06","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appmkygvwo","fornitoreId":"forn05","data":"2026-08-06","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgfliji1","fornitoreId":"forn07","data":"2026-08-06","ora":"09:30","oraOriginale":"09:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appjmiyqfy","fornitoreId":"forn06","data":"2026-08-06","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw7nh8rq","fornitoreId":"forn16","data":"2026-08-06","ora":"14:30","oraOriginale":"14:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appqtxhi15","fornitoreId":"forn09","data":"2026-08-06","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe36htf4","fornitoreId":"forn18","data":"2026-08-06","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appds3qsqc","fornitoreId":"forn17","data":"2026-08-06","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app30ubmc9","fornitoreId":"forn08","data":"2026-08-06","ora":"08:00","oraOriginale":"08:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkgex08n","fornitoreId":"forn02","data":"2026-08-06","ora":"16:00","oraOriginale":"16:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnyxtxmg","fornitoreId":"forn15","data":"2026-08-06","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appg51bxw7","fornitoreId":"forn04","data":"2026-08-07","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbvzb0oi","fornitoreId":"forn05","data":"2026-08-07","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appi6uu13i","fornitoreId":"forn01","data":"2026-08-07","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appjuv0gyu","fornitoreId":"forn14","data":"2026-08-07","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applofn1r4","fornitoreId":"forn15","data":"2026-08-07","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcootnjl","fornitoreId":"forn17","data":"2026-08-07","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgjyv5g1","fornitoreId":"forn09","data":"2026-08-07","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6k6hg00","fornitoreId":"forn13","data":"2026-08-07","ora":"09:30","oraOriginale":"09:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appoilkqxl","fornitoreId":"forn07","data":"2026-08-07","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app01lhlb5","fornitoreId":"forn16","data":"2026-08-07","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appupfln4r","fornitoreId":"forn02","data":"2026-08-07","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appr00q0mf","fornitoreId":"forn22","data":"2026-08-07","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appohgi1jn","fornitoreId":"forn01","data":"2026-07-26","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyt7rpwh","fornitoreId":"forn02","data":"2026-07-26","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6nnyfx4","fornitoreId":"forn03","data":"2026-07-26","ora":"09:30","oraOriginale":"09:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appm8t1qoj","fornitoreId":"forn04","data":"2026-07-26","ora":"10:30","oraOriginale":"10:30","tipo":"carico","ritardoMin":10,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appah9tq6v","fornitoreId":"forn05","data":"2026-07-26","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9mh7f2v","fornitoreId":"forn01","data":"2026-07-26","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app97xbar3","fornitoreId":"forn06","data":"2026-07-26","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcpdlals","fornitoreId":"forn07","data":"2026-07-26","ora":"15:00","oraOriginale":"15:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph2bhjo1","fornitoreId":"forn08","data":"2026-07-26","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"}],"registro":[{"id":"logtg698s4","tipo":"info","testo":"Sistema avviato. 25 fornitori, 172 appuntamenti caricati.","meta":"2026-07-26T20:58:40.222541"},{"id":"logmz7e5v0","tipo":"info","testo":"Agenda di oggi caricata: 9 appuntamenti.","meta":"2026-07-26T20:58:58.913140"}],"chat":{}};
+  DEMO._version = VERSION;
+  DEMO._loadedAt = new Date().toISOString();
+
+  var demoStr = JSON.stringify(DEMO);
+  
+  try {
+    localStorage.setItem(KEY_L2, demoStr);
+    localStorage.setItem(KEY_APP, demoStr);
+    console.log('MGC v1.1.0: dati demo caricati —', 
+      DEMO.fornitori.length, 'fornitori,', 
+      DEMO.appuntamenti.length, 'appuntamenti');
+  } catch(e) {
+    console.warn('MGC: impossibile salvare dati demo:', e.message);
+  }
+})();
+
+</script>
+
 <script>(function(){
 // Sessione gestita da MGC
 function logout(){if(typeof MGC!=='undefined'){MGC.hideApp();}else{sessionStorage.clear();location.href='index.html';}}
@@ -1577,7 +1878,7 @@ function deleteAppt(id){
 // ── UTENTI ───────────────────────────────────────────────
 function renderUtenti(){
   const D=getData();
-  document.getElementById('forn-count').textContent=`${D.fornitori.length} fornitori`;
+  (document.getElementById('forn-count') || {}).textContent = `${D.fornitori.length} fornitori`;
   document.getElementById('forn-tbody').innerHTML=D.fornitori.map(f=>`
     <tr>
       <td style="font-family:monospace;color:var(--text2);">${f.id}</td>
@@ -1604,7 +1905,7 @@ function renderRegistro(){
 // ── RAW DATA ─────────────────────────────────────────────
 function renderRaw(){
   const D=getData();
-  document.getElementById('json-view').textContent=JSON.stringify(D,null,2);
+  (document.getElementById('json-view') || {}).textContent = JSON.stringify(D,null,2);
 }
 function copyJson(){navigator.clipboard.writeText(document.getElementById('json-view').textContent).then(()=>alert('Copiato!'));}
 function exportJson(){
@@ -1723,7 +2024,7 @@ function renderDashboard(){
     <div class="stat"><div class="lbl">Questo mese</div><div class="val">${totMese}</div><div class="sub">movimenti</div></div>
     <div class="stat"><div class="lbl">Fornitori</div><div class="val">${D.fornitori.length}</div><div class="sub">abilitati</div></div>
   `;
-  document.getElementById('dash-data-oggi').textContent=fmtLong(oggi);
+  (document.getElementById('dash-data-oggi') || {}).textContent = fmtLong(oggi);
 
   // Flusso oggi — barre per fascia oraria
   const mattinaCount=apptOggi.filter(a=>['08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30'].includes(a.oraOriginale)).length;
@@ -1773,8 +2074,8 @@ function renderDashboard(){
 // ── AGENDA ─────────────────────────────────────────────────
 function renderAgenda(){
   const D=getData();
-  document.getElementById('ag-d1').textContent=new Date(currentDate+'T00:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'short'});
-  document.getElementById('ag-d2').textContent=fmtLong(currentDate);
+  (document.getElementById('l4-ag-d1') || {}).textContent = new Date(currentDate+'T00:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'short'});
+  (document.getElementById('l4-ag-d2') || {}).textContent = fmtLong(currentDate);
   const appts=D.appuntamenti.filter(a=>a.data===currentDate&&a.stato==='confermato').sort((a,b)=>a.ora.localeCompare(b.ora));
   if(appts.length===0){
     document.getElementById('ag-content').innerHTML=`<div class="card"><div class="card-body"><div class="empty"><div class="ico">📋</div><div class="t">Nessun appuntamento</div></div></div></div>`;
@@ -1805,9 +2106,9 @@ function renderAgenda(){
       ${pom.length?buildRows(pom):`<div class="empty"><div class="t">Nessun appuntamento pomeriggio</div></div>`}
     </div>`;
 }
-document.getElementById('btn-prev').addEventListener('click',()=>{currentDate=addDays(currentDate,-1);renderAgenda();});
-document.getElementById('btn-next').addEventListener('click',()=>{currentDate=addDays(currentDate,1);renderAgenda();});
-document.getElementById('btn-oggi').addEventListener('click',()=>{currentDate=toDateStr(new Date());renderAgenda();});
+document.getElementById('btn-prev')?.addEventListener('click',()=>{currentDate=addDays(currentDate,-1);renderAgenda();});
+document.getElementById('btn-next')?.addEventListener('click',()=>{currentDate=addDays(currentDate,1);renderAgenda();});
+document.getElementById('btn-oggi')?.addEventListener('click',()=>{currentDate=toDateStr(new Date());renderAgenda();});
 
 // ── REPORT ─────────────────────────────────────────────────
 function renderReport(){
@@ -2084,8 +2385,8 @@ function showToast(msg, kind){
   else{document.getElementById('app').classList.remove('active');
     document.getElementById('login-screen').style.display='flex';}
 }
-document.getElementById('sb-logout-btn').addEventListener('click', doLogout);
-document.getElementById('logout-btn-mobile').addEventListener('click', doLogout);
+document.getElementById('sb-logout-btn')?.addEventListener('click', doLogout);
+document.getElementById('logout-btn-mobile')?.addEventListener('click', doLogout);
 
 // ============================================================
 // NAVIGATION (sidebar desktop + bottom nav mobile, stesso stato)
@@ -2102,8 +2403,8 @@ function switchView(view){
   if (view !== 'chat') chatFornitoreAttivo = null;
   document.querySelectorAll('.sb-nav-item[data-view]').forEach(i => i.classList.toggle('active', i.dataset.view === view));
   document.querySelectorAll('.bn-item[data-view]').forEach(i => i.classList.toggle('active', i.dataset.view === view));
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + view).classList.add('active');
+  document.querySelectorAll('#layer-l2 .page').forEach(p => p.classList.remove('active'));
+  document.querySelector('#layer-l2 #page-' + view)?.classList.add('active');
   renderView(view);
 }
 
@@ -2130,7 +2431,7 @@ function fornitoreById(id){ return DATA.fornitori.find(f => f.id === id); }
 // AGENDA
 // ============================================================
 function renderAgenda(){
-  const grid = document.getElementById('stats-grid');
+  const grid = document.querySelector('#layer-l2 #stats-grid');
   const appDelGiorno = DATA.appuntamenti.filter(a => a.data === currentDate && a.stato === 'confermato').sort((a,b) => timeToMin(a.oraOriginale) - timeToMin(b.oraOriginale));
   const slots = generaSlotsGiorno();
   const slotsMattina = slots.filter(s => s.periodo === 'mattina');
@@ -2167,7 +2468,7 @@ function renderAgenda(){
   document.getElementById('day-nav-d2').textContent = fmtDateLong(currentDate);
   document.getElementById('agenda-date-picker').value = currentDate;
 
-  const slotsContainer = document.getElementById('agenda-slots');
+  const slotsContainer = document.querySelector('#layer-l2 #agenda-slots');
   slotsContainer.innerHTML = `
     <div class="fascia-header">
       <span class="ftitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>Mattina</span>
@@ -2245,22 +2546,22 @@ function renderSlotRow(slot, appDelGiorno){
 }
 
 function shiftDay(delta){ const d = new Date(currentDate + 'T00:00:00'); d.setDate(d.getDate() + delta); currentDate = toDateStr(d); renderAgenda(); }
-document.getElementById('btn-prev-day').addEventListener('click', () => shiftDay(-1));
-document.getElementById('btn-next-day').addEventListener('click', () => shiftDay(1));
-document.getElementById('btn-today').addEventListener('click', () => { currentDate = toDateStr(new Date()); chiudiCalendario(); renderAgenda(); });
-document.getElementById('agenda-date-picker').addEventListener('change', (e) => { currentDate = e.target.value; renderAgenda(); });
+document.getElementById('btn-prev-day')?.addEventListener('click', () => shiftDay(-1));
+document.getElementById('btn-next-day')?.addEventListener('click', () => shiftDay(1));
+document.getElementById('btn-today')?.addEventListener('click', () => { currentDate = toDateStr(new Date()); chiudiCalendario(); renderAgenda(); });
+document.getElementById('agenda-date-picker')?.addEventListener('change', (e) => { currentDate = e.target.value; renderAgenda(); });
 
 // ============================================================
 // CALENDARIO POPUP VISIVO
 // ============================================================
 let calViewYear = null, calViewMonth = null, calPopupOpen = false;
 
-document.getElementById('btn-cal-toggle').addEventListener('click', (e) => {
+document.getElementById('btn-cal-toggle')?.addEventListener('click', (e) => {
   e.stopPropagation();
   toggleCalendario();
 });
 
-document.getElementById('day-nav-label-wrap').addEventListener('click', (e) => {
+document.getElementById('day-nav-label-wrap')?.addEventListener('click', (e) => {
   if (e.target.tagName === 'INPUT') return;
 });
 
@@ -2350,8 +2651,8 @@ function renderCalendario(){
     });
   }, 50);
 }
-document.getElementById('fab-nuovo').addEventListener('click', () => openModalNuovo());
-document.getElementById('btn-nuovo-desktop').addEventListener('click', () => openModalNuovo());
+document.getElementById('fab-nuovo')?.addEventListener('click', () => openModalNuovo());
+document.getElementById('btn-nuovo-desktop')?.addEventListener('click', () => openModalNuovo());
 
 // ============================================================
 // ELENCO APPUNTAMENTI
@@ -2540,11 +2841,11 @@ function aggiornaDisponibilitaEccezionale(){
   if (!consentito && tipoSel.value === 'eccezionale') tipoSel.value = 'carico';
 }
 
-document.getElementById('nf-ora').addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
-document.getElementById('nf-data').addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
-document.getElementById('nf-tipo').addEventListener('change', function(){ document.getElementById('nf-slot-error').style.display = 'none'; });
+document.getElementById('nf-ora')?.addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
+document.getElementById('nf-data')?.addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
+document.getElementById('nf-tipo')?.addEventListener('change', function(){ document.getElementById('nf-slot-error').style.display = 'none'; });
 
-document.getElementById('nf-confirm').addEventListener('click', async function(){
+document.getElementById('nf-confirm')?.addEventListener('click', async function(){
   const pwd = document.getElementById('nf-pwd').value;
   if (pwd !== '2580'){ document.getElementById('nf-pwd-error').style.display = 'block'; return; }
   document.getElementById('nf-pwd-error').style.display = 'none';
@@ -2646,11 +2947,11 @@ function openModalDettaglio(apptId){
     </button>
   `;
 
-  document.getElementById('det-btn-ritardo').addEventListener('click', () => {
+  document.getElementById('det-btn-ritardo')?.addEventListener('click', () => {
     closeModal('modal-dettaglio');
     setTimeout(() => openModalRitardo(apptId), 120);
   });
-  document.getElementById('det-btn-cancella').addEventListener('click', () => {
+  document.getElementById('det-btn-cancella')?.addEventListener('click', () => {
     closeModal('modal-dettaglio');
     setTimeout(() => openModalCancella(apptId), 120);
   });
@@ -2669,7 +2970,7 @@ function openModalCancella(apptId){
   document.getElementById('modal-cancella').classList.add('active');
 }
 
-document.getElementById('ca-confirm').addEventListener('click', async function(){
+document.getElementById('ca-confirm')?.addEventListener('click', async function(){
   const pwd = document.getElementById('ca-pwd').value;
   if (pwd !== '2580'){ document.getElementById('ca-pwd-error').style.display = 'block'; return; }
   const a = DATA.appuntamenti.find(x => x.id === pendingAction.apptId);
@@ -2718,7 +3019,7 @@ function openModalRitardo(apptId){
   document.getElementById('modal-ritardo').classList.add('active');
 }
 
-document.getElementById('rt-confirm').addEventListener('click', async function(){
+document.getElementById('rt-confirm')?.addEventListener('click', async function(){
   const minuti = parseInt(document.getElementById('rt-minuti').value, 10);
   const a = DATA.appuntamenti.find(x => x.id === pendingAction.apptId);
   const f = fornitoreById(a.fornitoreId);
@@ -2877,12 +3178,12 @@ function renderChatWindow(fornitoreId, cont){
   const area = document.getElementById('chat-msgs-area');
   area.scrollTop = area.scrollHeight;
 
-  document.getElementById('chat-back-btn').addEventListener('click', () => {
+  document.getElementById('chat-back-btn')?.addEventListener('click', () => {
     chatFornitoreAttivo = null; renderChat();
   });
 
   function invia(){
-    const inp = document.getElementById('chat-input');
+    const inp = document.querySelector('#layer-l2 #chat-input');
     const testo = inp.value.trim();
     if (!testo) return;
     if (!DATA.chat[fornitoreId]) DATA.chat[fornitoreId] = { msgs: [] };
@@ -2918,8 +3219,8 @@ function renderChatWindow(fornitoreId, cont){
     }, 2000 + Math.random()*2000);
   }
 
-  document.getElementById('chat-send-btn').addEventListener('click', invia);
-  document.getElementById('chat-input').addEventListener('keydown', (e) => { if(e.key==='Enter') invia(); });
+  document.getElementById('chat-send-btn')?.addEventListener('click', invia);
+  document.querySelector('#layer-l2 #chat-input')?.addEventListener('keydown', (e) => { if(e.key==='Enter') invia(); });
 }
 
 function aggiornaBadgeChat(){
@@ -3107,8 +3408,8 @@ document.querySelectorAll('.bn[data-view]').forEach(b=>b.addEventListener('click
 
 function renderAgenda(){
   const D=getData();
-  document.getElementById('ag-d1').textContent=fmtMed(currentDate);
-  document.getElementById('ag-d2').textContent=fmtLong(currentDate);
+  (document.getElementById('l4-ag-d1') || {}).textContent = fmtMed(currentDate);
+  (document.getElementById('l4-ag-d2') || {}).textContent = fmtLong(currentDate);
 
   const oggi=toDS(new Date());
   const isOggi=currentDate===oggi;
@@ -3218,10 +3519,10 @@ function renderCerca(q){
   }).join('');
 }
 
-document.getElementById('btn-prev').addEventListener('click',()=>{currentDate=addDays(currentDate,-1);renderAgenda();});
-document.getElementById('btn-next').addEventListener('click',()=>{currentDate=addDays(currentDate,1);renderAgenda();});
-document.getElementById('btn-oggi').addEventListener('click',()=>{currentDate=toDS(new Date());renderAgenda();});
-document.getElementById('search-input').addEventListener('input',e=>renderCerca(e.target.value));
+document.getElementById('btn-prev')?.addEventListener('click',()=>{currentDate=addDays(currentDate,-1);renderAgenda();});
+document.getElementById('btn-next')?.addEventListener('click',()=>{currentDate=addDays(currentDate,1);renderAgenda();});
+document.getElementById('btn-oggi')?.addEventListener('click',()=>{currentDate=toDS(new Date());renderAgenda();});
+document.querySelector('#layer-l3 #search-input').addEventListener('input',e=>renderCerca(e.target.value));
 
 
 window._mgcI3 = function(username, fId) {
@@ -3618,20 +3919,20 @@ function renderRitardo(){
       b.style.background='var(--ambra)';b.style.borderColor='var(--ambra)';b.style.color='#fff';
       document.getElementById('conferma-ritardo-area').innerHTML=`
         <button class="btn btn-ambra" id="btn-segnala-ritardo">⏱ Segnala ritardo di ${minSel} minuti</button>`;
-      document.getElementById('btn-segnala-ritardo').addEventListener('click',()=>segnaRitardo(target,minSel));
+      document.getElementById('btn-segnala-ritardo')?.addEventListener('click',()=>segnaRitardo(target,minSel));
     });
   });
 
-  document.getElementById('btn-geo').addEventListener('click',()=>{
+  document.getElementById('btn-geo')?.addEventListener('click',()=>{
     if(!navigator.geolocation){ alert('Geolocalizzazione non disponibile su questo dispositivo.'); return; }
-    document.getElementById('geo-pos-txt').textContent='Rilevamento in corso…';
+    (document.getElementById('geo-pos-txt') || {}).textContent = 'Rilevamento in corso…';
     navigator.geolocation.getCurrentPosition(pos=>{
       geoPos={lat:pos.coords.latitude.toFixed(5),lon:pos.coords.longitude.toFixed(5),acc:Math.round(pos.coords.accuracy)};
-      document.getElementById('geo-pos-txt').textContent=`📍 ${geoPos.lat}, ${geoPos.lon} (±${geoPos.acc}m)`;
-      document.getElementById('btn-geo').textContent='✓ Posizione rilevata';
+      (document.getElementById('geo-pos-txt') || {}).textContent = `📍 ${geoPos.lat}, ${geoPos.lon} (±${geoPos.acc}m)`;
+      (document.getElementById('btn-geo') || {}).textContent = '✓ Posizione rilevata';
       document.getElementById('btn-geo').style.color='var(--verde)';
     },err=>{
-      document.getElementById('geo-pos-txt').textContent='Impossibile rilevare la posizione.';
+      (document.getElementById('geo-pos-txt') || {}).textContent = 'Impossibile rilevare la posizione.';
     });
   });
 }
