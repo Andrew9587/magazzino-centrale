@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>Magazzino Centrale v1.1.0</title>
+<title>Magazzino Centrale v1.2.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -415,271 +415,43 @@
   }
 
 
+/* ════════════════════════════════════════════════════════════
+   COMPONENTI AGGIUNTIVI — usati da L0/L1/L3/L4
+   ════════════════════════════════════════════════════════════ */
 
-/* ════════════════════════════════════════════
-   Stile unificato — componenti aggiuntivi
-   (basati sul design system del L2)
-   ════════════════════════════════════════════ */
-
-/* Badge livello — usato da L0, L1, L3, L4 */
-.lv-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 3px 8px; border-radius: 6px;
-  font-size: 10px; font-weight: 700; letter-spacing: .05em;
-  font-family: var(--mono);
-}
-.lv-badge.lv0 { background: #6e40c9; color: #fff; }
-.lv-badge.lv1 { background: var(--blu-800); color: #fff; }
-.lv-badge.lv2 { background: var(--verde); color: #fff; }
-.lv-badge.lv3 { background: var(--ambra); color: #fff; }
-.lv-badge.lv4 { background: var(--ardesia-700); color: #fff; }
-
-/* Dev badge L0 */
-.dev-badge {
-  display: inline-flex; align-items: center;
-  background: #6e40c9; color: #fff;
-  padding: 3px 10px; border-radius: 6px;
-  font-size: 11px; font-weight: 700; letter-spacing: .05em;
-  font-family: var(--mono);
-}
-
-/* Layout con sidebar (L1 desktop) */
-.sidebar {
-  display: none;
-  width: 240px; flex-shrink: 0;
-  background: var(--blu-900);
-  color: #fff;
-  flex-direction: column;
-  height: 100vh;
-  position: fixed; left: 0; top: 0;
-  z-index: 100;
-  overflow-y: auto;
-}
-@media(min-width: 900px) {
-  .sidebar { display: flex; }
-  .main-with-sidebar { margin-left: 240px; }
-}
-.sidebar-head {
-  padding: 20px 16px 16px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.sb-brand { display: flex; align-items: center; gap: 10px; }
-.sb-brand .mark {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: rgba(255,255,255,.1);
-  display: flex; align-items: center; justify-content: center;
-}
-.sb-brand .mark svg { width: 18px; height: 18px; }
-.sb-title { font-size: 13px; font-weight: 700; color: #fff; }
-.sb-sub { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
-.sb-nav { padding: 12px 8px; }
-.sb-sec {
-  font-size: 10px; font-weight: 700; letter-spacing: .08em;
-  text-transform: uppercase; color: rgba(255,255,255,.35);
-  padding: 12px 8px 6px;
-}
-.sb-item {
-  display: flex; align-items: center; gap: 10px;
-  width: 100%; padding: 9px 10px; border: none;
-  background: none; color: rgba(255,255,255,.65);
-  border-radius: 8px; cursor: pointer;
-  font-size: 13px; font-weight: 500;
-  font-family: var(--sans); text-align: left;
-  transition: background .15s, color .15s;
-}
-.sb-item svg { width: 17px; height: 17px; flex-shrink: 0; }
-.sb-item:hover { background: rgba(255,255,255,.08); color: #fff; }
-.sb-item.active { background: rgba(255,255,255,.12); color: #fff; font-weight: 600; }
-.sb-avatar-row {
-  margin-top: auto; padding: 14px 16px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  display: flex; align-items: center; gap: 10px;
-}
-.sb-av {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: rgba(255,255,255,.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700; color: #fff;
-  font-family: var(--mono); flex-shrink: 0;
-}
-.sb-info { flex: 1; min-width: 0; }
-.sb-name { font-size: 13px; font-weight: 600; color: #fff; }
-.sb-role { font-size: 11px; color: rgba(255,255,255,.5); }
-.sb-logout {
-  background: none; border: none; cursor: pointer;
-  color: rgba(255,255,255,.45); padding: 4px;
-  border-radius: 6px; transition: color .15s;
-}
-.sb-logout:hover { color: #fff; }
-.sb-logout svg { width: 16px; height: 16px; }
-
-/* Layout principale per livelli con sidebar */
-.app-layout {
-  display: flex; flex-direction: column;
-  min-height: 100vh; background: var(--bg);
-}
-
-/* Mobile nav generico (mn-item — usato da L0) */
-.mobile-nav {
-  display: flex; position: fixed; bottom: 0; left: 0; right: 0;
-  background: #fff;
-  border-top: 1px solid var(--ardesia-100);
-  padding: 6px 0; padding-bottom: calc(6px + env(safe-area-inset-bottom,0px));
-  z-index: 100; gap: 0;
-}
-.mn-item {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; gap: 3px;
-  border: none; background: none; cursor: pointer;
-  color: var(--ardesia-400); padding: 4px 2px;
-  font-family: var(--sans);
-}
-.mn-item svg { width: 20px; height: 20px; }
-.mn-item span { font-size: 10px; font-weight: 500; }
-.mn-item.active { color: var(--blu-700); }
-
-/* Btn logout nella topbar (L0 stile) */
-.btn-logout {
-  display: flex; align-items: center; gap: 5px;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 8px; padding: 6px 12px;
-  color: #fff; font-size: 12px; font-weight: 600;
-  cursor: pointer; font-family: var(--sans);
-  transition: background .15s;
-}
-.btn-logout:hover { background: rgba(255,255,255,.2); }
-
-/* Layout L0 */
-.layout { display: flex; min-height: calc(100vh - 56px); }
-.sid {
-  display: none; width: 220px; flex-shrink: 0;
-  background: var(--blu-900); color: #fff;
-  flex-direction: column; padding: 16px 0;
-}
-@media(min-width: 900px) { .sid { display: flex; } }
-.sid-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 16px; border: none; background: none;
-  color: rgba(255,255,255,.65); cursor: pointer;
-  font-size: 13px; font-family: var(--sans); text-align: left;
-  width: 100%; transition: background .15s;
-}
-.sid-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-.sid-item.active { background: rgba(255,255,255,.1); color: #fff; font-weight: 600; }
-.sid-item:hover { background: rgba(255,255,255,.07); color: #fff; }
-
-/* Main content */
-.main {
-  flex: 1; overflow-y: auto;
-  padding: 16px;
-  padding-bottom: calc(80px + env(safe-area-inset-bottom,0px));
-}
-@media(min-width: 900px) { .main { padding-bottom: 24px; } }
-
-/* Card varianti */
-.card { background: var(--card); border-radius: 12px; box-shadow: var(--shadow-sm); margin-bottom: 12px; overflow: hidden; }
-.card-head { padding: 14px 16px 0; }
-.card-body { padding: 14px 16px; }
-.card-head h3 { font-size: 14px; font-weight: 700; color: var(--ardesia-900); }
-
-/* Stat boxes */
-.stat-box { text-align: center; }
-.stat-val { font-size: 28px; font-weight: 800; color: var(--blu-800); line-height: 1; }
-.stat-lbl { font-size: 11px; color: var(--ardesia-500); margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; }
-
-/* Badge colori */
-.badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 600; }
-.b-v { background: var(--verde-bg); color: var(--verde); }
-.b-r { background: var(--rosso-bg); color: var(--rosso); }
-.b-a { background: var(--ambra-bg); color: var(--ambra); }
-.b-b { background: var(--blu-100); color: var(--blu-800); }
-
-/* Form elements */
-.form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-.form-row label { font-size: 12px; font-weight: 600; color: var(--ardesia-700); }
-.form-row input, .form-row select, .form-row textarea {
-  padding: 10px 12px; border: 1.5px solid var(--ardesia-100);
-  border-radius: 9px; font-size: 14px; font-family: var(--sans);
-  background: #fff; color: var(--ardesia-900); outline: none;
-  transition: border-color .15s;
-}
-.form-row input:focus, .form-row select:focus { border-color: var(--blu-600); }
-
-/* Btn varianti */
-.btn-sm {
-  padding: 7px 14px; border: none; border-radius: 8px;
-  font-size: 13px; font-weight: 600; cursor: pointer;
-  font-family: var(--sans); transition: opacity .15s;
-}
-.btn-sm.danger { background: var(--rosso); color: #fff; }
-.btn-sm:hover { opacity: .85; }
-
-/* Search bar */
-.search-bar {
-  display: flex; align-items: center; gap: 8px;
-  background: #fff; border: 1.5px solid var(--ardesia-100);
-  border-radius: 10px; padding: 9px 12px; margin-bottom: 14px;
-}
-.search-bar svg { width: 16px; height: 16px; color: var(--ardesia-400); flex-shrink: 0; }
-.search-bar input {
-  border: none; outline: none; font-size: 14px;
-  font-family: var(--sans); color: var(--ardesia-900);
-  background: none; width: 100%;
-}
-
-/* JSON block (L0) */
-.json-block {
-  background: #1e2733; color: #e6edf3;
-  border-radius: 10px; padding: 14px;
-  font-family: var(--mono); font-size: 12px;
-  overflow-x: auto; white-space: pre;
-  max-height: 400px; overflow-y: auto;
-}
-
-/* Day navigation */
-.day-nav {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 14px;
-}
-.day-nav button {
-  width: 32px; height: 32px; border: 1.5px solid var(--ardesia-100);
-  border-radius: 8px; background: #fff; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--ardesia-700); font-family: var(--sans);
-}
-.day-nav .day-label {
-  flex: 1; text-align: center;
-  font-size: 14px; font-weight: 600; color: var(--ardesia-900);
-}
-.btn-today {
-  padding: 5px 12px; border: 1.5px solid var(--ardesia-100);
-  border-radius: 8px; background: #fff; cursor: pointer;
-  font-size: 12px; font-weight: 600; color: var(--ardesia-700);
-  font-family: var(--sans);
-}
-
-/* Topbar unificata — tutti i livelli */
-.topbar {
+/* Topbar comune a tutti i livelli */
+.topbar-mgc {
   position: sticky; top: 0; z-index: 50;
   background: var(--blu-900);
-  padding: 0 16px;
-  height: 56px;
-  display: flex; align-items: center;
+  height: 56px; display: flex; align-items: center;
+  padding: 0 16px; gap: 12px;
+  padding-top: var(--safe-top);
   box-shadow: 0 1px 0 rgba(0,0,0,.15);
 }
-.topbar-id {
+.topbar-mgc .tb-brand {
   display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;
 }
-.topbar-id .mark {
+.topbar-mgc .tb-icon {
   width: 32px; height: 32px; border-radius: 8px;
   background: rgba(255,255,255,.1);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.topbar-id .mark svg { width: 18px; height: 18px; }
-.topbar-id .l1 { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.topbar-id .l2 { font-size: 11px; color: rgba(255,255,255,.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.topbar-av {
+.topbar-mgc .tb-icon svg { width: 18px; height: 18px; }
+.topbar-mgc .tb-text { min-width: 0; }
+.topbar-mgc .tb-title {
+  font-size: 13px; font-weight: 700; color: #fff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.topbar-mgc .tb-sub {
+  font-size: 10px; color: rgba(255,255,255,.5);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.topbar-mgc .tb-badge {
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 10px; font-weight: 700;
+  font-family: var(--mono); flex-shrink: 0;
+}
+.topbar-mgc .tb-av {
   width: 32px; height: 32px; border-radius: 50%;
   background: rgba(255,255,255,.15);
   display: flex; align-items: center; justify-content: center;
@@ -687,264 +459,379 @@
   font-family: var(--mono); flex-shrink: 0; cursor: pointer;
   border: none;
 }
-
-/* L0 topbar specifico */
-.topbar-l { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.topbar-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-
-
-
-/* ════ Fix critico layout L2 ════ */
-#layer-l2.mgc-active {
-  display: block !important;
-  height: 100vh;
-  overflow: hidden;
+.topbar-mgc .tb-logout {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px; padding: 6px 12px;
+  color: #fff; font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: var(--sans);
+  white-space: nowrap;
 }
-#layer-l2 #app {
-  display: none;
-}
-#layer-l2 #app.active {
-  display: flex !important;
-  flex-direction: row !important;
-  height: 100vh !important;
-  overflow: hidden;
-  width: 100%;
-}
-#layer-l2 #app.active .sidebar {
-  flex-shrink: 0;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-}
-#layer-l2 #app.active .main {
-  flex: 1 !important;
-  min-width: 0;
-  height: 100vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-#layer-l2 #login-screen {
-  display: none !important;
-}
+.topbar-mgc .tb-logout:active { background: rgba(255,255,255,.2); }
 
-/* Fix topbar L2: su desktop è nascosto (usa sidebar) */
-#layer-l2 .topbar {
-  display: none;
+/* Layout principale layer */
+.layer-wrap {
+  display: flex; flex-direction: column;
+  min-height: 100vh; background: var(--bg);
 }
-@media(max-width: 767px) {
-  #layer-l2 .topbar {
-    display: flex;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-  #layer-l2 .sidebar {
-    display: none !important;
-  }
-  #layer-l2 #app.active {
-    flex-direction: column !important;
-    height: auto !important;
-    min-height: 100vh;
-  }
-  #layer-l2 #app.active .main {
-    height: auto !important;
-    overflow-y: visible;
-    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
-  }
-  #layer-l2 .bottom-nav {
-    display: flex !important;
-  }
+.layer-main {
+  flex: 1; overflow-y: auto;
+  padding: 16px;
+  padding-bottom: calc(80px + var(--safe-bottom));
 }
-
-
-
-
-
-/* Fix sidebar L2 desktop */
 @media(min-width: 768px) {
-  #layer-l2.mgc-active .sidebar {
-    display: flex !important;
-    width: 248px;
-    flex-shrink: 0;
-    height: 100vh;
-  }
-  #layer-l2.mgc-active .topbar {
-    display: none !important;
-  }
-  #layer-l2.mgc-active .bottom-nav {
-    display: none !important;
-  }
+  .layer-main { padding: 24px; padding-bottom: 32px; }
 }
 
-/* Fix pagine L2 */
-#layer-l2.mgc-active .page {
-  display: none;
-}
-#layer-l2.mgc-active .page.active {
-  display: block !important;
-  min-height: 200px !important;
-}
-
-
-/* ════ Fix CSS L0 — variabili e layout ════ */
-#layer-l0 {
-  /* Variabili design system L0 */
-  --bg: #F6F7F9;
-  --surface: #FFFFFF;
-  --surface2: #F0F2F5;
-  --border: #E5E8ED;
-  --text: #1E2733;
-  --text2: #6B7685;
-  --text3: #9AA3AF;
-  --blu: #2563EB;
-  --blu-bg: rgba(37,99,235,.1);
-  --verde: #16A34A;
-  --verde-bg: rgba(22,163,74,.1);
-  --rosso: #DC2626;
-  --rosso-bg: rgba(220,38,38,.1);
-  --ambra: #D97706;
-  --ambra-bg: rgba(217,119,6,.1);
-  --mono: 'Roboto Mono', monospace;
-  --sans: 'Inter', sans-serif;
-  --serif: 'Source Serif 4', Georgia, serif;
-}
-
-/* Fix layout statistiche L0 */
-#layer-l0 .stat-row {
-  display: flex !important;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-#layer-l0 .stat-box {
+/* Bottom nav comune */
+.bnav-mgc {
+  position: fixed; bottom: 0; left: 0; right: 0;
   background: #fff;
-  border: 1px solid #E5E8ED;
-  border-radius: 10px;
-  padding: 14px 16px;
-  flex: 1;
-  min-width: 130px;
-  text-align: left;
-}
-#layer-l0 .stat-box .lbl {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  color: #9AA3AF;
-  margin-bottom: 4px;
-}
-#layer-l0 .stat-box .val {
-  font-size: 26px;
-  font-weight: 800;
-  color: #1E2733;
-  line-height: 1.1;
-  font-family: 'Inter', sans-serif;
-}
-#layer-l0 .stat-box .sub {
-  font-size: 11px;
-  color: #6B7685;
-  margin-top: 3px;
-}
-
-/* Fix card L0 */
-#layer-l0 .card {
-  background: #fff;
-  border: 1px solid #E5E8ED;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-}
-#layer-l0 .card-head h2, #layer-l0 .card-head h3 {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1E2733;
-  margin-bottom: 12px;
-}
-
-/* Fix topbar L0 */
-#layer-l0 .topbar {
-  background: var(--blu-900, #10243F) !important;
-  color: #fff !important;
-}
-
-/* Fix layout principale L0 */
-#layer-l0 .layout {
-  display: flex;
-  min-height: calc(100vh - 56px);
-}
-#layer-l0 .main {
-  flex: 1;
-  padding: 16px;
-  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
-  background: #F6F7F9;
-  overflow-y: auto;
-  min-width: 0;
-}
-#layer-l0 .page { display: none; }
-#layer-l0 .page.active { display: block !important; }
-
-/* Fix bottom nav L0 */
-#layer-l0 .mobile-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: #fff;
-  border-top: 1px solid #E5E8ED;
+  border-top: 1px solid var(--ardesia-100);
   display: flex;
   padding: 6px 0;
-  padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(6px + var(--safe-bottom));
   z-index: 100;
 }
-#layer-l0 .mn-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: #9AA3AF;
-  padding: 4px 2px;
-  font-family: 'Inter', sans-serif;
+.bnav-mgc .bn-btn {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  border: none; background: none; cursor: pointer;
+  color: var(--ardesia-400); padding: 4px 2px;
+  font-family: var(--sans);
 }
-#layer-l0 .mn-item svg { width: 20px; height: 20px; display: block; }
-#layer-l0 .mn-item span { font-size: 10px; font-weight: 500; }
-#layer-l0 .mn-item.active { color: #2563EB; }
+.bnav-mgc .bn-btn svg { width: 22px; height: 22px; display: block; }
+.bnav-mgc .bn-btn span { font-size: 10px; font-weight: 500; }
+.bnav-mgc .bn-btn.active { color: var(--blu-700); }
 
-/* Dev badge */
-#layer-l0 .dev-badge {
-  background: #6e40c9;
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 5px;
-  font-size: 11px;
-  font-weight: 700;
-  font-family: 'Roboto Mono', monospace;
+/* Pagine */
+.lpage { display: none; }
+.lpage.active { display: block; }
+
+/* Stat grid — usata da L0 e L1 */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; margin-bottom: 16px;
 }
-#layer-l0 .lv-badge {
-  padding: 2px 8px;
-  border-radius: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  font-family: 'Roboto Mono', monospace;
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--ardesia-100);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.stat-card .sc-lbl {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ardesia-500); margin-bottom: 6px;
+}
+.stat-card .sc-val {
+  font-size: 28px; font-weight: 800;
+  color: var(--ardesia-900); line-height: 1;
+  font-family: var(--sans);
+}
+.stat-card .sc-sub {
+  font-size: 11px; color: var(--ardesia-500); margin-top: 4px;
+}
+.stat-card.verde .sc-val { color: var(--verde); }
+.stat-card.ambra  .sc-val { color: var(--ambra); }
+.stat-card.blu    .sc-val { color: var(--blu-700); }
+.stat-card.rosso  .sc-val { color: var(--rosso); }
+
+/* Bar chart */
+.bar-chart { display: flex; flex-direction: column; gap: 10px; }
+.bar-row { display: flex; align-items: center; gap: 10px; }
+.bar-lbl { font-size: 13px; color: var(--ardesia-700); min-width: 80px; }
+.bar-wrap { flex: 1; background: var(--ardesia-100); border-radius: 99px; height: 8px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 99px; background: var(--blu-700); transition: width .4s; }
+.bar-val { font-size: 12px; font-weight: 700; color: var(--ardesia-700); min-width: 24px; text-align: right; }
+
+/* Appt list */
+.appt-list { display: flex; flex-direction: column; gap: 8px; }
+.appt-item {
+  background: #fff; border: 1px solid var(--ardesia-100);
+  border-radius: 10px; padding: 12px 14px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.appt-item .ai-ora {
+  font-size: 13px; font-weight: 700; color: var(--ardesia-900);
+  font-family: var(--mono); min-width: 40px;
+}
+.appt-item .ai-body { flex: 1; min-width: 0; }
+.appt-item .ai-nome { font-size: 14px; font-weight: 600; color: var(--ardesia-900); }
+.appt-item .ai-tipo { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+.appt-item .ai-ritardo { font-size: 11px; color: var(--ambra); margin-top: 2px; }
+.appt-item .ai-stato { font-size: 11px; color: var(--ardesia-400); margin-top: 2px; }
+
+/* Tipo colors */
+.tipo-carico   { color: var(--blu-700); }
+.tipo-scarico  { color: var(--verde); }
+.tipo-entrambi { color: var(--ambra); }
+.tipo-eccezione, .tipo-eccezionale { color: var(--rosso); }
+
+.tipo-pill {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 5px;
+  font-size: 10px; font-weight: 700; letter-spacing: .03em;
+}
+.pill-carico   { background: var(--blu-100); color: var(--blu-800); }
+.pill-scarico  { background: var(--verde-bg); color: var(--verde); }
+.pill-entrambi { background: var(--ambra-bg); color: var(--ambra); }
+.pill-eccez    { background: var(--rosso-bg); color: var(--rosso); }
+
+/* Fornitori list */
+.forn-list { display: flex; flex-direction: column; gap: 8px; }
+.forn-item {
+  background: #fff; border: 1px solid var(--ardesia-100);
+  border-radius: 10px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.forn-item .fi-rank {
+  font-size: 13px; font-weight: 700; color: var(--ardesia-400);
+  min-width: 24px;
+}
+.forn-item .fi-body { flex: 1; min-width: 0; }
+.forn-item .fi-nome { font-size: 14px; font-weight: 600; color: var(--ardesia-900); }
+.forn-item .fi-ref  { font-size: 12px; color: var(--ardesia-500); margin-top: 1px; }
+.forn-item .fi-stats { text-align: right; }
+.forn-item .fi-appt { font-size: 13px; font-weight: 700; color: var(--ardesia-900); }
+.forn-item .fi-sub  { font-size: 10px; color: var(--ardesia-400); }
+
+/* Day nav */
+.day-nav-mgc {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px;
+}
+.day-nav-mgc .dnav-btn {
+  width: 34px; height: 34px;
+  border: 1.5px solid var(--ardesia-100);
+  border-radius: 8px; background: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ardesia-700);
+}
+.day-nav-mgc .dnav-label {
+  flex: 1; text-align: center;
+  font-size: 13px; font-weight: 600; color: var(--ardesia-900);
+}
+.day-nav-mgc .dnav-today {
+  padding: 6px 12px;
+  border: 1.5px solid var(--ardesia-100);
+  border-radius: 8px; background: #fff; cursor: pointer;
+  font-size: 12px; font-weight: 600; color: var(--ardesia-700);
+  font-family: var(--sans);
 }
 
-/* Fix testo centrato (problema visto nello screenshot) */
-#layer-l0 .main * {
-  text-align: left;
+/* Period tabs */
+.period-tabs {
+  display: flex; gap: 6px; margin-bottom: 16px;
 }
-#layer-l0 .stat-box * {
-  text-align: left !important;
+.period-tab {
+  padding: 7px 16px; border-radius: 8px;
+  border: 1.5px solid var(--ardesia-100);
+  background: #fff; cursor: pointer;
+  font-size: 13px; font-weight: 600;
+  color: var(--ardesia-600); font-family: var(--sans);
 }
+.period-tab.active {
+  background: var(--blu-700); color: #fff; border-color: var(--blu-700);
+}
+
+/* Section header */
+.sec-head {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ardesia-500); margin: 16px 0 8px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 40px 20px;
+  color: var(--ardesia-400);
+}
+.empty-state .es-icon { font-size: 36px; margin-bottom: 10px; }
+.empty-state .es-text { font-size: 14px; font-weight: 500; }
+
+/* Flusso slots */
+.flusso-row {
+  display: flex; gap: 12px; margin-bottom: 12px;
+}
+.flusso-col { flex: 1; }
+.flusso-col .fc-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ardesia-500); margin-bottom: 6px;
+}
+.flusso-col .fc-bar-wrap {
+  background: var(--ardesia-100); border-radius: 6px; height: 10px;
+  overflow: hidden; margin-bottom: 4px;
+}
+.flusso-col .fc-bar { height: 100%; border-radius: 6px; background: var(--blu-700); }
+.flusso-col .fc-sub { font-size: 11px; color: var(--ardesia-500); }
+
+/* Alert / warning box */
+.alert-box {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 500;
+  margin-bottom: 12px;
+}
+.alert-box.ambra { background: var(--ambra-bg); color: var(--ambra); }
+.alert-box.rosso  { background: var(--rosso-bg); color: var(--rosso); }
+.alert-box.verde  { background: var(--verde-bg); color: var(--verde); }
+
+/* Tabella appuntamenti L0 */
+.appt-table-wrap { overflow-x: auto; }
+.appt-tbl {
+  width: 100%; border-collapse: collapse;
+  font-size: 12px;
+}
+.appt-tbl th {
+  text-align: left; padding: 8px 10px;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--ardesia-500);
+  border-bottom: 1px solid var(--ardesia-100);
+}
+.appt-tbl td {
+  padding: 10px 10px; border-bottom: 1px solid var(--ardesia-100);
+  color: var(--ardesia-800); vertical-align: top;
+}
+.appt-tbl tr:last-child td { border-bottom: none; }
+
+/* Badge stato */
+.stato-badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px; border-radius: 5px;
+  font-size: 10px; font-weight: 700;
+}
+.stato-conf { background: var(--verde-bg); color: var(--verde); }
+.stato-att  { background: var(--ambra-bg); color: var(--ambra); }
+.stato-canc { background: var(--rosso-bg); color: var(--rosso); }
+
+/* Prenota L4 */
+.step-indicator {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 20px; overflow-x: auto;
+}
+.step-item {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; gap: 4px;
+}
+.step-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  background: var(--ardesia-100); color: var(--ardesia-500);
+}
+.step-item.done .step-circle { background: var(--verde); color: #fff; }
+.step-item.active .step-circle { background: var(--blu-700); color: #fff; }
+.step-label { font-size: 9px; color: var(--ardesia-400); text-align: center; font-weight: 600; }
+.step-item.active .step-label { color: var(--blu-700); }
+.step-line { flex: 1; height: 2px; background: var(--ardesia-100); margin-top: 14px; }
+.step-line.done { background: var(--verde); }
+
+/* Slot calendar */
+.slot-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px; }
+.slot-btn {
+  padding: 10px 8px; text-align: center;
+  border: 1.5px solid var(--ardesia-100);
+  border-radius: 10px; background: #fff;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  color: var(--ardesia-900); font-family: var(--sans);
+}
+.slot-btn.selected { border-color: var(--blu-700); background: var(--blu-100); color: var(--blu-800); }
+.slot-btn.occupato { background: var(--ardesia-50,#f8f9fa); color: var(--ardesia-300); cursor: not-allowed; }
+
+/* Tipo selector */
+.tipo-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 16px; }
+.tipo-btn {
+  padding: 12px; border: 1.5px solid var(--ardesia-100);
+  border-radius: 10px; background: #fff; cursor: pointer;
+  text-align: center; font-family: var(--sans);
+}
+.tipo-btn .tb-nome { font-size: 13px; font-weight: 700; color: var(--ardesia-900); }
+.tipo-btn .tb-desc { font-size: 11px; color: var(--ardesia-500); margin-top: 2px; }
+.tipo-btn.selected { border-color: var(--blu-700); background: var(--blu-100); }
+
+/* Btn primario */
+.btn-primary {
+  width: 100%; padding: 14px;
+  background: var(--blu-700); color: #fff;
+  border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; font-family: var(--sans);
+}
+.btn-primary:active { opacity: .85; }
+.btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+
+/* Input */
+.inp-mgc {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--ardesia-100);
+  border-radius: 10px; font-size: 14px;
+  color: var(--ardesia-900); font-family: var(--sans);
+  background: #fff; outline: none;
+}
+.inp-mgc:focus { border-color: var(--blu-600,#2563EB); }
+
+/* Search bar */
+.search-bar-mgc {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff; border: 1.5px solid var(--ardesia-100);
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 14px;
+}
+.search-bar-mgc svg { width: 16px; height: 16px; color: var(--ardesia-400); flex-shrink: 0; }
+.search-bar-mgc input {
+  border: none; outline: none; font-size: 14px;
+  font-family: var(--sans); color: var(--ardesia-900);
+  background: none; width: 100%;
+}
+
+/* Toast */
+#toast-stack-mgc {
+  position: fixed; top: calc(66px + var(--safe-top));
+  left: 12px; right: 12px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 8px;
+  pointer-events: none;
+}
+.toast-item {
+  background: var(--ardesia-900); color: #fff;
+  border-radius: 10px; padding: 12px 16px;
+  font-size: 13px; font-weight: 500;
+  animation: toast-in .2s ease;
+}
+@keyframes toast-in { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
+
+/* Ritardo selector L4 */
+.ritardo-sel {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+  margin-bottom: 16px;
+}
+.ritardo-btn {
+  padding: 12px; border: 1.5px solid var(--ardesia-100);
+  border-radius: 10px; background: #fff; cursor: pointer;
+  text-align: center; font-size: 14px; font-weight: 700;
+  color: var(--ardesia-900); font-family: var(--sans);
+}
+.ritardo-btn.selected { border-color: var(--ambra); background: var(--ambra-bg); color: var(--ambra); }
+
+/* Form admin L0 */
+.form-mgc { display: flex; flex-direction: column; gap: 12px; }
+.form-row-mgc { display: flex; flex-direction: column; gap: 5px; }
+.form-row-mgc label { font-size: 12px; font-weight: 600; color: var(--ardesia-600); }
+.form-row-mgc select {
+  padding: 11px 14px; border: 1.5px solid var(--ardesia-100);
+  border-radius: 9px; font-size: 14px;
+  color: var(--ardesia-900); font-family: var(--sans);
+  background: #fff;
+}
+
 
 /* ════ MGC Layer System ════ */
 .mgc-layer { display: none !important; }
 #layer-login.mgc-active {
   display: flex !important; flex-direction: column;
-  align-items: center; justify-content: center;
-  min-height: 100vh;
+  align-items: center; justify-content: center; min-height: 100vh;
   background: radial-gradient(1200px 600px at 15% 0%, rgba(38,98,143,.18), transparent 60%),
               linear-gradient(155deg,#10243F 0%,#163A5F 55%,#0C1B2E 100%);
   padding: 24px;
@@ -952,14 +839,43 @@
   padding-bottom: calc(24px + env(safe-area-inset-bottom,0px));
   overflow-y: auto; box-sizing: border-box;
 }
+/* L0/L1/L3/L4: display block */
 #layer-l0.mgc-active,#layer-l1.mgc-active,
-#layer-l2.mgc-active,#layer-l3.mgc-active,
-#layer-l4.mgc-active { 
+#layer-l3.mgc-active,#layer-l4.mgc-active {
   display: block !important;
   width: 100vw !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
 }
+/* L2 mantiene il suo layout originale */
+#layer-l2.mgc-active {
+  display: block !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden;
+}
+#layer-l2 #app.active {
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden;
+}
+#layer-l2 .sidebar { height: 100vh; flex-shrink: 0; }
+#layer-l2 .topbar { display: none; }
+#layer-l2 .main {
+  flex: 1 !important; min-width: 0 !important;
+  height: 100vh !important; overflow-y: auto !important;
+}
+#layer-l2 #login-screen { display: none !important; }
+#layer-l2 .page { display: none; }
+#layer-l2 .page.active { display: block !important; min-height: 200px !important; }
+@media(max-width: 767px) {
+  #layer-l2 .topbar { display: flex !important; position: sticky; top:0; z-index:50; }
+  #layer-l2 .sidebar { display: none !important; }
+  #layer-l2 #app.active { flex-direction: column !important; height: auto !important; overflow: visible; }
+  #layer-l2 .main { height: auto !important; overflow-y: visible !important; }
+  #layer-l2 .bottom-nav { display: flex !important; }
+}
+/* Fix getElementById scoped per switchView L2 */
 
 </style>
 </head>
@@ -972,7 +888,7 @@
     </div>
     <div style="font-family:'Source Serif 4',Georgia,serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.02em;">MAGAZZINO CENTRALE</div>
     <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:5px;">Sistema Gestione Fornitori</div>
-    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:4px;font-family:'Roboto Mono',monospace;">v1.1.0 — 2026-07-26</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:4px;font-family:'Roboto Mono',monospace;">v1.2.0 — 2026-07-26</div>
   </div>
   <div style="background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.15);border-radius:18px;padding:28px 24px 30px;">
     <div id="login-error-mgc" style="display:none;background:rgba(168,49,31,.3);border:1.5px solid rgba(168,49,31,.5);color:#FCA5A5;border-radius:10px;padding:11px 14px;font-size:13px;font-weight:500;margin-bottom:18px;"></div>
@@ -1007,282 +923,207 @@
 </div>
 </div>
 <div class="mgc-layer" id="layer-l0">
-
-<div class="topbar">
-  <div class="topbar-l">
-    <span class="dev-badge">DEV · L0</span>
-    <span class="topbar-title">Magazzino Centrale · <span>Sistema Admin</span></span>
+<div class="topbar-mgc">
+  <div class="tb-brand">
+    <div class="tb-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+        <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="tb-text">
+      <div class="tb-title">Magazzino Centrale</div>
+      <div class="tb-sub">Sistema Admin</div>
+    </div>
   </div>
-  <button class="btn-logout" onclick="logout()">↩ Esci</button>
+  <span class="tb-badge" style="background:#6e40c9;color:#fff;">DEV·L0</span>
+  <button class="tb-logout" onclick="logout()">&#8617; Esci</button>
 </div>
+<div id="toast-stack-mgc"></div>
+<div class="layer-main">
 
-<div class="layout">
+  <!-- Overview -->
+  <div class="lpage active" id="page-overview">
+    <div class="page-head"><h1>System Overview</h1><div class="sub">Stato del sistema in tempo reale</div></div>
+    <div class="stat-grid" id="ov-stats"></div>
+    <div class="card"><div class="card-head"><h3>Appuntamenti per tipo</h3></div>
+      <div class="card-body" id="ov-tipi"></div></div>
+    <div class="card"><div class="card-head"><h3>Attività recente</h3></div>
+      <div id="ov-log"></div></div>
+  </div>
 
-  <aside class="sidebar">
-    <div class="sb-section">Sistema</div>
-    <button class="sb-item active" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Overview</button>
-    <button class="sb-item" data-view="appuntamenti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Appuntamenti</button>
-    <button class="sb-item" data-view="utenti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Utenti/Fornitori</button>
-    <div class="sb-section">Debug</div>
-    <button class="sb-item" data-view="registro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>Registro</button>
-    <button class="sb-item" data-view="rawdata"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Dati Raw JSON</button>
-    <div class="sb-section">Manutenzione</div>
-    <button class="sb-item" data-view="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Admin Tools</button>
-  </aside>
-
-  <main class="main">
-
-    <!-- OVERVIEW -->
-    <div class="page active" id="page-overview">
-      <div class="page-head"><h1>System Overview</h1><div class="sub">Stato del sistema in tempo reale</div></div>
-      <div class="stat-row" id="ov-stats"></div>
-      <div class="card"><div class="card-head"><h2>Appuntamenti per tipo</h2></div><div class="card-body" id="ov-tipi"></div></div>
-      <div class="card"><div class="card-head"><h2>Attività recente</h2></div><div id="ov-log"></div></div>
+  <!-- Appuntamenti -->
+  <div class="lpage" id="page-appuntamenti">
+    <div class="page-head"><h1>Tutti gli appuntamenti</h1><div class="sub">Modifica, cancella, ispeziona ogni appuntamento</div></div>
+    <div class="card">
+      <div class="card-body" style="display:flex;gap:8px;flex-wrap:wrap;">
+        <input type="date" id="filter-date" class="inp-mgc" style="flex:1;min-width:120px;" placeholder="Filtra per data"/>
+        <select id="filter-stato" class="inp-mgc" style="flex:1;min-width:120px;">
+          <option value="">Tutti</option>
+          <option value="confermato">Confermato</option>
+          <option value="in_attesa">In attesa</option>
+          <option value="cancellato">Cancellato</option>
+        </select>
+      </div>
+      <div id="appt-table"></div>
     </div>
+  </div>
 
-    <!-- APPUNTAMENTI -->
-    <div class="page" id="page-appuntamenti">
-      <div class="page-head">
-        <h1>Tutti gli appuntamenti</h1>
-        <div class="sub">Modifica, cancella, ispeziona ogni appuntamento nel sistema</div>
-      </div>
-      <div class="card">
-        <div class="card-head">
-          <h2>Filtri</h2>
-          <div style="display:flex;gap:8px;">
-            <input type="date" id="filter-date" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;">
-            <select id="filter-stato" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;">
-              <option value="">Tutti</option><option value="confermato">Confermati</option><option value="cancellato">Cancellati</option>
-            </select>
-          </div>
-        </div>
-        <div style="overflow-x:auto;"><table id="appt-table"><thead><tr><th>Data</th><th>Ora</th><th>Fornitore</th><th>Tipo</th><th>Ritardo</th><th>Stato</th><th>Azioni</th></tr></thead><tbody id="appt-tbody"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- UTENTI -->
-    <div class="page" id="page-utenti">
-      <div class="page-head"><h1>Utenti e Fornitori</h1><div class="sub">Anagrafica completa con credenziali di accesso (visibile solo al Livello 0)</div></div>
-      <div class="card">
-        <div class="card-head"><h2>Livelli di accesso</h2></div>
-        <div style="overflow-x:auto;"><table>
-          <thead><tr><th>Livello</th><th>Username</th><th>Password</th><th>Ruolo</th></tr></thead>
-          <tbody>
-            <tr><td><span class="badge b-r">L0</span></td><td class="bold" style="font-family:monospace;">dev</td><td style="font-family:monospace;">dev0000</td><td>Sviluppatore</td></tr>
-            <tr><td><span class="badge b-b">L1</span></td><td class="bold" style="font-family:monospace;">direttore</td><td style="font-family:monospace;">dir1111</td><td>Gestore/Capo Area</td></tr>
-            <tr><td><span class="badge b-v">L2</span></td><td class="bold" style="font-family:monospace;">m.rossi</td><td style="font-family:monospace;">mag2222</td><td>Operatore Magazzino</td></tr>
-            <tr><td><span class="badge b-a">L3</span></td><td class="bold" style="font-family:monospace;">guardiola</td><td style="font-family:monospace;">grd3333</td><td>Guardiola</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>Fornitori registrati</h2><span style="font-size:12px;color:var(--text2);" id="forn-count"></span></div>
-        <div style="overflow-x:auto;"><table><thead><tr><th>ID</th><th>Nome</th><th>Referente</th><th>Email</th><th>Telefono</th><th>Password</th></tr></thead><tbody id="forn-tbody"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- REGISTRO -->
-    <div class="page" id="page-registro">
-      <div class="page-head"><h1>Registro operazioni</h1><div class="sub">Log completo di tutte le azioni nel sistema</div></div>
-      <div class="card"><div id="log-list" style="padding:0 16px;"></div></div>
-    </div>
-
-    <!-- RAW DATA -->
-    <div class="page" id="page-rawdata">
-      <div class="page-head">
-        <h1>Dati Raw JSON</h1>
-        <div class="sub">Ispezione diretta del database localStorage</div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>Storage</h2>
-          <div style="display:flex;gap:8px;">
-            <button class="btn-sm" onclick="copyJson()">📋 Copia</button>
-            <button class="btn-sm primary" onclick="exportJson()">⬇ Esporta JSON</button>
-          </div>
-        </div>
-        <div class="card-body"><div class="json-block" id="json-view">Caricamento…</div></div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>Import JSON</h2></div>
-        <div class="card-body">
-          <div class="form-row"><label>Incolla JSON per sovrascrivere il database</label><textarea id="import-json" rows="6" placeholder='{"fornitori":[],"appuntamenti":[],...}'></textarea></div>
-          <button class="btn-sm primary" onclick="importJson()">⬆ Importa e sovrascrivi</button>
+  <!-- Utenti -->
+  <div class="lpage" id="page-utenti">
+    <div class="page-head"><h1>Utenti e Fornitori</h1><div class="sub">Credenziali di accesso</div></div>
+    <div class="card">
+      <div class="card-head"><h3>Livelli di accesso</h3></div>
+      <div class="card-body">
+        <div class="appt-tbl" style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr><th style="padding:6px 8px;text-align:left;color:var(--ardesia-500);font-size:10px;text-transform:uppercase;">Livello</th><th style="padding:6px 8px;text-align:left;color:var(--ardesia-500);font-size:10px;text-transform:uppercase;">Username</th><th style="padding:6px 8px;text-align:left;color:var(--ardesia-500);font-size:10px;text-transform:uppercase;">Password</th><th style="padding:6px 8px;text-align:left;color:var(--ardesia-500);font-size:10px;text-transform:uppercase;">Ruolo</th></tr>
+            <tr><td style="padding:8px;"><span class="tb-badge" style="background:#6e40c9;color:#fff;">L0</span></td><td style="padding:8px;font-family:var(--mono);font-size:12px;">dev</td><td style="padding:8px;font-family:var(--mono);font-size:12px;">dev0000</td><td style="padding:8px;">Sviluppatore</td></tr>
+            <tr><td style="padding:8px;"><span class="tb-badge" style="background:var(--blu-800);color:#fff;">L1</span></td><td style="padding:8px;font-family:var(--mono);font-size:12px;">direttore</td><td style="padding:8px;font-family:var(--mono);font-size:12px;">dir1111</td><td style="padding:8px;">Gestore/Capo Area</td></tr>
+            <tr><td style="padding:8px;"><span class="tb-badge" style="background:var(--verde);color:#fff;">L2</span></td><td style="padding:8px;font-family:var(--mono);font-size:12px;">m.rossi</td><td style="padding:8px;font-family:var(--mono);font-size:12px;">mag2222</td><td style="padding:8px;">Operatore Magazzino</td></tr>
+            <tr><td style="padding:8px;"><span class="tb-badge" style="background:var(--ambra);color:#fff;">L3</span></td><td style="padding:8px;font-family:var(--mono);font-size:12px;">guardiola</td><td style="padding:8px;font-family:var(--mono);font-size:12px;">grd3333</td><td style="padding:8px;">Guardiola</td></tr>
+          </table>
         </div>
       </div>
     </div>
-
-    <!-- ADMIN TOOLS -->
-    <div class="page" id="page-admin">
-      <div class="page-head"><h1>Admin Tools</h1><div class="sub">Operazioni di manutenzione e reset</div></div>
-      <div class="card">
-        <div class="card-head"><h2>Azioni di sistema</h2></div>
-        <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px;background:var(--surface2);border-radius:6px;">
-            <div><div style="font-size:13px;font-weight:600;color:var(--text);">Rigenera dati demo</div><div style="font-size:11.5px;color:var(--text2);margin-top:2px;">Sostituisce tutti gli appuntamenti con nuovi dati demo realistici</div></div>
-            <button class="btn-sm" onclick="rigenera()">🔄 Rigenera</button>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px;background:var(--surface2);border-radius:6px;">
-            <div><div style="font-size:13px;font-weight:600;color:var(--text);">Cancella tutti i ritardi</div><div style="font-size:11.5px;color:var(--text2);margin-top:2px;">Resetta i ritardoMin a 0 su tutti gli appuntamenti</div></div>
-            <button class="btn-sm" onclick="cancellaRitardi()">⏱ Reset ritardi</button>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px;background:var(--surface2);border-radius:6px;">
-            <div><div style="font-size:13px;font-weight:600;color:var(--text);">Svuota registro operazioni</div><div style="font-size:11.5px;color:var(--text2);margin-top:2px;">Cancella lo storico delle operazioni mantenendo gli appuntamenti</div></div>
-            <button class="btn-sm" onclick="svuotaLog()">🗑 Svuota log</button>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px;background:var(--rosso-bg);border:1px solid rgba(248,81,73,.3);border-radius:6px;">
-            <div><div style="font-size:13px;font-weight:600;color:var(--rosso);">RESET COMPLETO</div><div style="font-size:11.5px;color:var(--text2);margin-top:2px;">Cancella TUTTI i dati e ripristina il sistema da zero</div></div>
-            <button class="btn-sm danger" onclick="resetCompleto()">💥 RESET</button>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>Aggiungi appuntamento manuale</h2></div>
-        <div class="card-body">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div class="form-row"><label>Fornitore ID</label><input type="text" id="man-fid" placeholder="forn001"></div>
-            <div class="form-row"><label>Data</label><input type="date" id="man-data"></div>
-            <div class="form-row"><label>Orario</label><input type="text" id="man-ora" placeholder="09:00"></div>
-            <div class="form-row"><label>Tipo</label>
-              <select id="man-tipo">
-                <option value="carico">Carico</option><option value="scarico">Scarico</option>
-                <option value="entrambi">Entrambi</option><option value="eccezionale">Eccezionale</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn-sm primary" onclick="aggiungiManuale()">+ Aggiungi</button>
-        </div>
+    <div class="card">
+      <div class="card-head"><h3>Fornitori registrati</h3></div>
+      <div class="card-body">
+        <div class="sec-head" id="forn-count">25 fornitori</div>
+        <div id="forn-tbody"></div>
       </div>
     </div>
+  </div>
 
-  </main>
-</div>
+  <!-- Registro -->
+  <div class="lpage" id="page-registro-l0">
+    <div class="page-head"><h1>Registro Notifiche</h1><div class="sub">Log operazioni sistema</div></div>
+    <div id="log-list"></div>
+  </div>
 
-<!-- MOBILE NAV -->
-<nav class="mobile-nav">
-  <button class="mn-item active" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Overview</span></button>
-  <button class="mn-item" data-view="appuntamenti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Appt.</span></button>
-  <button class="mn-item" data-view="utenti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Utenti</span></button>
-  <button class="mn-item" data-view="rawdata"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Raw</span></button>
-  <button class="mn-item" data-view="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg><span>Admin</span></button>
-</nav>
+  <!-- Raw JSON -->
+  <div class="lpage" id="page-rawdata">
+    <div class="page-head"><h1>Dati Raw JSON</h1><div class="sub">Visualizzazione e import/export</div></div>
+    <div class="card">
+      <div class="card-body" style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="copyJson()" class="btn-primary" style="flex:1;">📋 Copia JSON</button>
+        <button onclick="exportJson()" class="btn-primary" style="flex:1;background:var(--verde);">⬇ Export</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <pre id="json-view" style="font-size:11px;font-family:var(--mono);overflow-x:auto;white-space:pre-wrap;color:var(--ardesia-800);"></pre>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Import JSON</h3></div>
+      <div class="card-body">
+        <textarea id="import-json" class="inp-mgc" rows="4" placeholder="Incolla JSON qui..."></textarea>
+        <button onclick="importJson()" class="btn-primary" style="margin-top:10px;background:var(--ambra);">⬆ Import</button>
+      </div>
+    </div>
+  </div>
 
+  <!-- Admin -->
+  <div class="lpage" id="page-admin">
+    <div class="page-head"><h1>Admin Tools</h1><div class="sub">Gestione avanzata sistema</div></div>
+    <div class="card">
+      <div class="card-head"><h3>Aggiungi appuntamento manuale</h3></div>
+      <div class="card-body form-mgc">
+        <div class="form-row-mgc"><label>Fornitore ID</label><input id="man-fid" class="inp-mgc" placeholder="forn01"/></div>
+        <div class="form-row-mgc"><label>Data</label><input type="date" id="man-data" class="inp-mgc"/></div>
+        <div class="form-row-mgc"><label>Ora</label><input type="time" id="man-ora" class="inp-mgc" step="1800"/></div>
+        <div class="form-row-mgc"><label>Tipo</label>
+          <select id="man-tipo" class="inp-mgc">
+            <option value="carico">Carico</option>
+            <option value="scarico">Scarico</option>
+            <option value="entrambi">Carico+Scarico</option>
+            <option value="eccezionale">Eccezionale</option>
+          </select>
+        </div>
+        <button onclick="aggiungiManuale()" class="btn-primary">+ Aggiungi</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Operazioni</h3></div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
+        <button onclick="cancellaRitardi()" class="btn-primary" style="background:var(--ambra);">🔄 Reset tutti i ritardi</button>
+        <button onclick="svuotaLog()" class="btn-primary" style="background:var(--ardesia-600);">🗑 Svuota log</button>
+        <button onclick="rigenera()" class="btn-primary" style="background:var(--verde);">⚡ Rigenera dati demo</button>
+        <button onclick="resetCompleto()" class="btn-primary" style="background:var(--rosso);">⚠ Reset completo</button>
+      </div>
+    </div>
+  </div>
 
 </div>
+<nav class="bnav-mgc"><button class="bn-btn" data-view="overview" onclick="switchView('overview')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Overview</span></button>
+<button class="bn-btn" data-view="appuntamenti" onclick="switchView('appuntamenti')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Appt.</span></button>
+<button class="bn-btn" data-view="utenti" onclick="switchView('utenti')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Utenti</span></button>
+<button class="bn-btn" data-view="rawdata" onclick="switchView('rawdata')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Raw</span></button>
+<button class="bn-btn" data-view="admin" onclick="switchView('admin')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg><span>Admin</span></button>
+</nav></div>
 <div class="mgc-layer" id="layer-l1">
-
-<aside class="sidebar">
-  <div class="sidebar-head">
-    <div class="sb-brand">
-      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="l1">MAGAZZINO<br>CENTRALE</div><div class="l2">Gestione Fornitori</div></div>
+<div class="topbar-mgc">
+  <div class="tb-brand">
+    <div class="tb-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+        <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-    <div class="sb-lv"><span class="dot"></span><div class="ltxt">LIVELLO 1 — GESTORE<small>Solo visualizzazione</small></div></div>
+    <div class="tb-text">
+      <div class="tb-title">Magazzino Centrale</div>
+      <div class="tb-sub">Livello 1 — Gestore</div>
+    </div>
   </div>
-  <nav class="sb-nav">
-    <div class="sb-sec">Dashboard</div>
-    <button class="sb-item active" data-view="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></button>
-    <button class="sb-item" data-view="agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Agenda</span></button>
-    <div class="sb-sec">Report</div>
-    <button class="sb-item" data-view="report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span>Report</span></button>
-    <button class="sb-item" data-view="fornitori"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Fornitori</span></button>
-  </nav>
-  <div class="sb-foot">
-    <div class="sb-user"><div class="av" id="sb-av">MB</div><div class="inf"><div class="name" id="sb-name">M. Bianchi</div><div class="role">Gestore / Capo Area</div></div></div>
-    <button class="sb-logout" onclick="logout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Esci</button>
-  </div>
-</aside>
-
-<div class="topbar">
-  <div class="topbar-id">
-    <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div><div class="l1">Magazzino Centrale</div><div class="l2">Livello 1 — Gestore</div></div>
-  </div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <span class="lv-badge">SOLA LETTURA</span>
-    <div class="avatar" id="top-av" onclick="logout()">MB</div>
-  </div>
+  <span class="tb-badge" style="background:var(--blu-800);color:#fff;">L1</span>
+  <button class="tb-logout" onclick="logout()">&#8617; Esci</button>
 </div>
+<div class="layer-main">
 
-<div class="readonly-bar">👁 Accesso in sola visualizzazione — nessuna modifica consentita a questo livello</div>
-
-<main class="main">
-
-  <!-- DASHBOARD -->
-  <section class="page active" id="page-dashboard">
+  <!-- Dashboard -->
+  <div class="lpage active" id="page-dashboard">
     <div class="page-head"><h1>Dashboard</h1><div class="sub">Panoramica operativa in tempo reale</div></div>
-    <div class="content">
-      <div class="stat-grid" id="dash-stats"></div>
-      <div class="card">
-        <div class="card-head"><h2>Flusso oggi</h2><span id="dash-data-oggi" style="font-size:12px;color:var(--ardesia-500);"></span></div>
-        <div class="card-body" id="dash-flusso"></div>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>Prossimi appuntamenti</h2></div>
-        <div id="dash-prossimi"></div>
-      </div>
-    </div>
-  </section>
+    <div class="stat-grid" id="dash-stats"></div>
+    <div class="card" id="dash-data-oggi"></div>
+    <div class="card" id="dash-flusso"></div>
+    <div class="card" id="dash-prossimi"></div>
+  </div>
 
-  <!-- AGENDA -->
-  <section class="page" id="page-agenda">
+  <!-- Agenda -->
+  <div class="lpage" id="page-agenda-l1">
     <div class="page-head"><h1>Agenda</h1><div class="sub">Visualizzazione appuntamenti — sola lettura</div></div>
-    <div class="content">
-      <div class="day-nav">
-        <button id="btn-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <div class="di"><div class="d1" id="ag-d1">—</div><div class="d2" id="ag-d2">—</div></div>
-        <button id="btn-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg></button>
-        <button class="btn-today" id="btn-oggi">Oggi</button>
-      </div>
-      <div id="ag-content"></div>
+    <div class="day-nav-mgc">
+      <button class="dnav-btn" id="btn-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="dnav-label"><div id="ag-d1" style="font-size:11px;color:var(--ardesia-500);"></div><div id="ag-d2" style="font-size:14px;font-weight:700;color:var(--ardesia-900);"></div></div>
+      <button class="dnav-btn" id="btn-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+      <button class="dnav-today" id="btn-oggi">Oggi</button>
     </div>
-  </section>
+    <div id="ag-content"></div>
+  </div>
 
-  <!-- REPORT -->
-  <section class="page" id="page-report">
+  <!-- Report -->
+  <div class="lpage" id="page-report">
     <div class="page-head"><h1>Report</h1><div class="sub">Analisi giornaliera, settimanale e mensile</div></div>
-    <div class="content">
-      <div class="periodo-sel">
-        <button class="periodo-btn active" data-p="giorno">Oggi</button>
-        <button class="periodo-btn" data-p="settimana">Settimana</button>
-        <button class="periodo-btn" data-p="mese">Mese</button>
-      </div>
-      <div id="report-content"></div>
+    <div class="period-tabs">
+      <button class="period-tab active" data-p="giorno" onclick="reportPeriodo='giorno';renderReport()">Oggi</button>
+      <button class="period-tab" data-p="settimana" onclick="reportPeriodo='settimana';renderReport()">Settimana</button>
+      <button class="period-tab" data-p="mese" onclick="reportPeriodo='mese';renderReport()">Mese</button>
     </div>
-  </section>
+    <div id="report-content"></div>
+  </div>
 
-  <!-- FORNITORI -->
-  <section class="page" id="page-fornitori">
+  <!-- Fornitori -->
+  <div class="lpage" id="page-fornitori-l1">
     <div class="page-head"><h1>Fornitori</h1><div class="sub">Ranking attività — sola lettura</div></div>
-    <div class="content">
-      <div class="card" id="forn-panel"></div>
-    </div>
-  </section>
-
-</main>
-
-<nav class="bottom-nav">
-  <button class="bn active" data-view="dashboard">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-    <span>Dashboard</span>
-  </button>
-  <button class="bn" data-view="agenda">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-    <span>Agenda</span>
-  </button>
-  <button class="bn" data-view="report">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-    <span>Report</span>
-  </button>
-  <button class="bn" data-view="fornitori">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    <span>Fornitori</span>
-  </button>
-</nav>
-
-<div id="toast-stack"></div>
-
+    <div id="forn-panel"></div>
+  </div>
 
 </div>
+<div id="toast-stack"></div>
+<nav class="bnav-mgc"><button class="bn-btn" data-view="dashboard" onclick="switchView('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></button>
+<button class="bn-btn" data-view="agenda" onclick="switchView('agenda')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Agenda</span></button>
+<button class="bn-btn" data-view="report" onclick="switchView('report')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span>Report</span></button>
+<button class="bn-btn" data-view="fornitori" onclick="switchView('fornitori')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Fornitori</span></button>
+</nav></div>
 <div class="mgc-layer" id="layer-l2">
 
 <!-- ===================== LOGIN ===================== -->
@@ -1564,107 +1405,95 @@
 
 </div>
 <div class="mgc-layer" id="layer-l3">
-
-<div class="topbar">
-  <div class="topbar-id">
-    <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div><div class="l1">Magazzino Centrale</div><div class="l2">Livello 3 — Guardiola</div></div>
+<div class="topbar-mgc">
+  <div class="tb-brand">
+    <div class="tb-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+        <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="tb-text">
+      <div class="tb-title">Magazzino Centrale</div>
+      <div class="tb-sub">Guardiola — Ingresso</div>
+    </div>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <span class="lv-badge">GUARDIOLA</span>
-    <div class="avatar" id="top-av" onclick="logout()">GV</div>
-  </div>
+  <span class="tb-badge" style="background:var(--ambra);color:#fff;">L3</span>
+  <button class="tb-logout" onclick="logout()">&#8617; Esci</button>
 </div>
-
 <div id="status-bar-container"></div>
+<div class="layer-main">
 
-<main class="main">
-  <section class="page active" id="page-oggi">
-    <div class="day-nav">
-      <button id="btn-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <div class="di"><div class="d1" id="ag-d1">—</div><div class="d2" id="ag-d2">—</div></div>
-      <button id="btn-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg></button>
-      <button class="btn-oggi" id="btn-oggi">Oggi</button>
+  <!-- Agenda oggi -->
+  <div class="lpage active" id="page-oggi">
+    <div class="page-head"><h1>Agenda del giorno</h1></div>
+    <div class="day-nav-mgc">
+      <button class="dnav-btn" id="ag-btn-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="dnav-label">
+        <div id="ag3-d1" style="font-size:11px;color:var(--ardesia-500);"></div>
+        <div id="ag3-d2" style="font-size:14px;font-weight:700;color:var(--ardesia-900);"></div>
+      </div>
+      <button class="dnav-btn" id="ag-btn-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
+      <button class="dnav-today" id="ag-btn-oggi">Oggi</button>
     </div>
     <div id="agenda-content"></div>
-  </section>
+  </div>
 
-  <section class="page" id="page-cerca">
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Cerca fornitore o ragione sociale…" autocomplete="off">
+  <!-- Cerca -->
+  <div class="lpage" id="page-cerca">
+    <div class="page-head"><h1>Cerca fornitore</h1></div>
+    <div class="search-bar-mgc">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input id="search-input" type="search" placeholder="Nome fornitore..." oninput="renderCerca()"/>
     </div>
     <div id="search-results"></div>
-  </section>
-</main>
-
-<nav class="bottom-nav">
-  <button class="bn active" data-view="oggi">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-    <span>Agenda</span>
-  </button>
-  <button class="bn" data-view="cerca">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <span>Cerca</span>
-  </button>
-</nav>
-
-
-</div>
-<div class="mgc-layer" id="layer-l4">
-
-<div class="topbar">
-  <div class="topbar-id">
-    <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-    <div><div class="l1">Portale Fornitore</div><div class="l2" id="top-nome">Magazzino Centrale</div></div>
   </div>
-  <div class="avatar" id="top-av" onclick="logout()">F</div>
+
 </div>
-
-<main class="main">
-
-  <!-- LE MIE PRENOTAZIONI -->
-  <section class="page active" id="page-home">
-    <div class="page-head"><h1>Le mie prenotazioni</h1><div class="sub" id="home-sub">I tuoi appuntamenti confermati</div></div>
-    <div class="content">
-      <div id="limiti-container"></div>
-      <div id="my-appts-list"></div>
+<nav class="bnav-mgc"><button class="bn-btn" data-view="oggi" onclick="switchView('oggi')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Oggi</span></button>
+<button class="bn-btn" data-view="cerca" onclick="switchView('cerca')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span>Cerca</span></button>
+</nav></div>
+<div class="mgc-layer" id="layer-l4">
+<div class="topbar-mgc">
+  <div class="tb-brand">
+    <div class="tb-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+        <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-  </section>
+    <div class="tb-text">
+      <div class="tb-title" id="top-nome">Magazzino Centrale</div>
+      <div class="tb-sub">Fornitore</div>
+    </div>
+  </div>
+  <button id="top-av" class="tb-av" onclick="logout()">F</button>
+</div>
+<div class="layer-main">
 
-  <!-- PRENOTA -->
-  <section class="page" id="page-prenota">
-    <div class="page-head"><h1>Nuova prenotazione</h1><div class="sub">Seleziona data, orario e tipo di movimento</div></div>
-    <div class="content" id="prenota-content"></div>
-  </section>
+  <!-- Home -->
+  <div class="lpage active" id="page-home">
+    <div class="page-head"><h1>I miei appuntamenti</h1><div class="sub" id="home-sub"></div></div>
+    <div id="limiti-container"></div>
+    <div id="my-appts-list"></div>
+  </div>
 
-  <!-- RITARDO -->
-  <section class="page" id="page-ritardo">
-    <div class="page-head"><h1>Segnala ritardo</h1><div class="sub">Avvisa il magazzino del tuo ritardo</div></div>
-    <div class="content" id="ritardo-content"></div>
-  </section>
+  <!-- Prenota -->
+  <div class="lpage" id="page-prenota">
+    <div class="page-head"><h1>Prenota slot</h1><div class="sub">Scegli data, ora e tipo</div></div>
+    <div id="prenota-content"></div>
+  </div>
 
-</main>
-
-<nav class="bottom-nav">
-  <button class="bn active" data-view="home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-    <span>Le mie</span>
-    <span class="bn-badge" id="bn-badge-my" style="display:none">0</span>
-  </button>
-  <button class="bn" data-view="prenota">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-    <span>Prenota</span>
-  </button>
-  <button class="bn" data-view="ritardo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    <span>Ritardo</span>
-  </button>
-</nav>
-
-<div id="toast-stack"></div>
-
+  <!-- Segnala ritardo -->
+  <div class="lpage" id="page-ritardo">
+    <div class="page-head"><h1>Segnala ritardo</h1><div class="sub">Aggiorna il tuo orario di arrivo</div></div>
+    <div id="ritardo-content"></div>
+  </div>
 
 </div>
+<div id="toast-stack"></div>
+<nav class="bnav-mgc"><button class="bn-btn" data-view="home" onclick="switchView('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg><span>I miei</span></button>
+<button class="bn-btn" data-view="prenota" onclick="switchView('prenota')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg><span>Prenota</span></button>
+<button class="bn-btn" data-view="ritardo" onclick="switchView('ritardo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Ritardo</span></button>
+</nav></div>
 <script>
 var MGC = (function() {
   function showApp(livello, fId, username) {
@@ -1691,19 +1520,18 @@ var MGC = (function() {
   return {showApp:showApp,hideApp:hideApp};
 })();
 window.logout=function(){MGC.hideApp();};
+
 var CREDS={
   0:{u:'dev',pw:'dev0000',hint:'dev  /  dev0000',fid:null},
   1:{u:'direttore',pw:'dir1111',hint:'direttore  /  dir1111',fid:null},
   2:{u:'m.rossi',pw:'mag2222',hint:'m.rossi  /  mag2222',fid:null},
   3:{u:'guardiola',pw:'grd3333',hint:'guardiola  /  grd3333',fid:null},
-  4:{u:'forn001',pw:'f001pass',hint:'forn001  /  f001pass',fid:'forn001'}
+  4:{u:'forn01',pw:'f01pass',hint:'forn01  /  f01pass',fid:'forn01'}
 };
 document.getElementById('mgc-sel').addEventListener('change',function(){
-  var v=this.value;
-  var hint=document.getElementById('mgc-hint');
+  var v=this.value; var hint=document.getElementById('mgc-hint');
   if(v!==''&&CREDS[parseInt(v)]!==undefined){
-    var c=CREDS[parseInt(v)];
-    hint.textContent=c.hint;
+    var c=CREDS[parseInt(v)]; hint.textContent=c.hint;
     document.getElementById('mgc-u').value=c.u;
     document.getElementById('mgc-p').value=c.pw;
   } else {
@@ -1717,8 +1545,7 @@ function mgcLogin(){
   var pw=(document.getElementById('mgc-p').value||'').trim();
   var selStr=document.getElementById('mgc-sel').value;
   var sel=(selStr!=='')?parseInt(selStr):-1;
-  var err=document.getElementById('login-error-mgc');
-  err.style.display='none';
+  var err=document.getElementById('login-error-mgc'); err.style.display='none';
   if(sel===-1){err.textContent='Seleziona il livello.';err.style.display='block';return;}
   var c=CREDS[sel];
   if(!c||c.u!==u||c.pw!==pw){err.textContent='Credenziali errate.';err.style.display='block';return;}
@@ -1729,58 +1556,23 @@ document.getElementById('mgc-u').addEventListener('keydown',function(e){if(e.key
 document.getElementById('mgc-p').addEventListener('keydown',function(e){if(e.key==='Enter')mgcLogin();});
 </script>
 <script>
-
-// ════════════════════════════════════════════════════════════
-// MAGAZZINO CENTRALE v1.1.0 — 2026-07-26
-// Init dati demo: caricati automaticamente al primo avvio
-// ════════════════════════════════════════════════════════════
 (function initDemoData() {
-  var KEY_L2  = 'mgc-l2-v1';   // usata dal L2
-  var KEY_APP = 'mgc-app-v1';  // usata da L0, L1, L3, L4
-  var VERSION = '1.1.0';
-
-  // Carica solo se non ci sono dati o se la versione è vecchia
-  var existing = localStorage.getItem(KEY_L2);
-  var existingApp = localStorage.getItem(KEY_APP);
-  
-  // Controlla se i dati sono già presenti e aggiornati
+  var KEY_L2='mgc-l2-v1'; var KEY_APP='mgc-app-v1'; var VER='1.2.0';
   try {
-    if (existing) {
-      var d = JSON.parse(existing);
-      if (d.fornitori && d.fornitori.length === 25 && d._version === VERSION) {
-        // Dati già presenti e aggiornati — sincronizza KEY_APP se necessario
-        if (!existingApp) {
-          localStorage.setItem(KEY_APP, existing);
-        }
-        return;
-      }
-    }
-  } catch(e) {}
-
-  // Carica i dati demo
-  var DEMO = {"fornitori":[{"id":"forn01","nome":"Logistica Adriatica S.r.l.","referente":"Marco Verdi","telefono":"340 1000000","email":"logistica.adriatica.s.r.l@demo.it","password":"f01pass"},{"id":"forn02","nome":"Trasporti Bianchi & Figli","referente":"Giulia Neri","telefono":"341 1000137","email":"trasporti.bianchi.figli@demo.it","password":"f02pass"},{"id":"forn03","nome":"Eurofresh Distribuzione","referente":"Luca Russo","telefono":"342 1000274","email":"eurofresh.distribuzione@demo.it","password":"f03pass"},{"id":"forn04","nome":"Cargo Veneto S.p.A.","referente":"Sara Ferrari","telefono":"343 1000411","email":"cargo.veneto.s.p.a@demo.it","password":"f04pass"},{"id":"forn05","nome":"Alimentari del Sole S.r.l.","referente":"Davide Colombo","telefono":"344 1000548","email":"alimentari.del.sole.s.r.l@demo.it","password":"f05pass"},{"id":"forn06","nome":"Frigo Trans Italia","referente":"Elena Verdi","telefono":"345 1000685","email":"frigo.trans.italia@demo.it","password":"f06pass"},{"id":"forn07","nome":"Mercurio Spedizioni","referente":"Paolo Neri","telefono":"346 1000822","email":"mercurio.spedizioni@demo.it","password":"f07pass"},{"id":"forn08","nome":"Conserve Po Valley","referente":"Chiara Russo","telefono":"347 1000959","email":"conserve.po.valley@demo.it","password":"f08pass"},{"id":"forn09","nome":"Lattiero Caseario Rossi","referente":"Marco Ferrari","telefono":"348 1001096","email":"lattiero.caseario.rossi@demo.it","password":"f09pass"},{"id":"forn10","nome":"Tessile Nord S.r.l.","referente":"Giulia Colombo","telefono":"349 1001233","email":"tessile.nord.s.r.l@demo.it","password":"f10pass"},{"id":"forn11","nome":"Ferramenta Universale","referente":"Luca Verdi","telefono":"350 1001370","email":"ferramenta.universale@demo.it","password":"f11pass"},{"id":"forn12","nome":"Vini e Distillati Colle","referente":"Sara Neri","telefono":"351 1001507","email":"vini.e.distillati.colle@demo.it","password":"f12pass"},{"id":"forn13","nome":"Ortofrutta Mediterranea","referente":"Davide Russo","telefono":"352 1001644","email":"ortofrutta.mediterranea@demo.it","password":"f13pass"},{"id":"forn14","nome":"Plast Pack Imballaggi","referente":"Elena Ferrari","telefono":"353 1001781","email":"plast.pack.imballaggi@demo.it","password":"f14pass"},{"id":"forn15","nome":"Carta e Cartoni Esposito","referente":"Paolo Colombo","telefono":"354 1001918","email":"carta.e.cartoni.esposito@demo.it","password":"f15pass"},{"id":"forn16","nome":"Surgelati Stella Polare","referente":"Chiara Verdi","telefono":"355 1002055","email":"surgelati.stella.polare@demo.it","password":"f16pass"},{"id":"forn17","nome":"Bevande Group Italia","referente":"Marco Neri","telefono":"356 1002192","email":"bevande.group.italia@demo.it","password":"f17pass"},{"id":"forn18","nome":"Macelleria Industriale Tosi","referente":"Giulia Russo","telefono":"357 1002329","email":"macelleria.industriale.tosi@demo.it","password":"f18pass"},{"id":"forn19","nome":"Forno Centrale Distribuzione","referente":"Luca Ferrari","telefono":"358 1002466","email":"forno.centrale.distribuzione@demo.it","password":"f19pass"},{"id":"forn20","nome":"Chimica Verde S.r.l.","referente":"Sara Colombo","telefono":"359 1002603","email":"chimica.verde.s.r.l@demo.it","password":"f20pass"},{"id":"forn21","nome":"Elettroforniture Marini","referente":"Davide Verdi","telefono":"360 1002740","email":"elettroforniture.marini@demo.it","password":"f21pass"},{"id":"forn22","nome":"Pelletteria Conceria Lux","referente":"Elena Neri","telefono":"361 1002877","email":"pelletteria.conceria.lux@demo.it","password":"f22pass"},{"id":"forn23","nome":"Carni Pregiate Lombarde","referente":"Paolo Russo","telefono":"362 1003014","email":"carni.pregiate.lombarde@demo.it","password":"f23pass"},{"id":"forn24","nome":"Detergenza Professionale","referente":"Chiara Ferrari","telefono":"363 1003151","email":"detergenza.professionale@demo.it","password":"f24pass"},{"id":"forn25","nome":"Idrotermosanitaria Bassi","referente":"Marco Colombo","telefono":"364 1003288","email":"idrotermosanitaria.bassi@demo.it","password":"f25pass"}],"appuntamenti":[{"id":"appthv3a3z","fornitoreId":"forn09","data":"2026-07-16","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appdnmmjbq","fornitoreId":"forn03","data":"2026-07-16","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw5uzbik","fornitoreId":"forn02","data":"2026-07-16","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyzycwti","fornitoreId":"forn08","data":"2026-07-16","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuy41ibl","fornitoreId":"forn07","data":"2026-07-16","ora":"08:00","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph9sdbdw","fornitoreId":"forn07","data":"2026-07-17","ora":"08:00","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appvqjt7ye","fornitoreId":"forn08","data":"2026-07-17","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkfazz81","fornitoreId":"forn05","data":"2026-07-17","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxvf1t2t","fornitoreId":"forn02","data":"2026-07-17","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app93iiuc0","fornitoreId":"forn01","data":"2026-07-17","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8fsv871","fornitoreId":"forn14","data":"2026-07-17","ora":"16:05","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxpseimv","fornitoreId":"forn18","data":"2026-07-17","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appciyhe7u","fornitoreId":"forn09","data":"2026-07-17","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxmo5bxx","fornitoreId":"forn15","data":"2026-07-17","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apptb94874","fornitoreId":"forn02","data":"2026-07-20","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appfao72kz","fornitoreId":"forn05","data":"2026-07-20","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appghc0clb","fornitoreId":"forn11","data":"2026-07-20","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcgvyie6","fornitoreId":"forn12","data":"2026-07-20","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuljylje","fornitoreId":"forn14","data":"2026-07-20","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcq99chj","fornitoreId":"forn10","data":"2026-07-20","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appf4zw9xa","fornitoreId":"forn03","data":"2026-07-20","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appj60fkhm","fornitoreId":"forn08","data":"2026-07-20","ora":"14:30","oraOriginale":"14:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6bw3bme","fornitoreId":"forn09","data":"2026-07-20","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppac56t4","fornitoreId":"forn06","data":"2026-07-20","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6246hid","fornitoreId":"forn07","data":"2026-07-20","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7if2gog","fornitoreId":"forn18","data":"2026-07-20","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ixokc1","fornitoreId":"forn08","data":"2026-07-21","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appt7e8g8j","fornitoreId":"forn10","data":"2026-07-21","ora":"12:00","oraOriginale":"12:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9e6gbps","fornitoreId":"forn14","data":"2026-07-21","ora":"08:00","oraOriginale":"08:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyncxll4","fornitoreId":"forn13","data":"2026-07-21","ora":"16:00","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applztgxn0","fornitoreId":"forn05","data":"2026-07-21","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph2vlpys","fornitoreId":"forn09","data":"2026-07-21","ora":"10:00","oraOriginale":"10:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxwd8il3","fornitoreId":"forn18","data":"2026-07-21","ora":"09:40","oraOriginale":"09:30","tipo":"carico","ritardoMin":10,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5uznofy","fornitoreId":"forn16","data":"2026-07-21","ora":"15:35","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8sbi4q2","fornitoreId":"forn02","data":"2026-07-21","ora":"10:50","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":20,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6wzs3t6","fornitoreId":"forn17","data":"2026-07-21","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyzcotoh","fornitoreId":"forn09","data":"2026-07-22","ora":"11:05","oraOriginale":"11:00","tipo":"carico","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appur7ko64","fornitoreId":"forn11","data":"2026-07-22","ora":"08:20","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":20,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apphhpbmyo","fornitoreId":"forn14","data":"2026-07-22","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6vxdp5g","fornitoreId":"forn03","data":"2026-07-22","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn13jcat","fornitoreId":"forn10","data":"2026-07-22","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbbi4wir","fornitoreId":"forn07","data":"2026-07-22","ora":"09:45","oraOriginale":"09:30","tipo":"carico","ritardoMin":15,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgv0e38d","fornitoreId":"forn13","data":"2026-07-22","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7hv3izk","fornitoreId":"forn18","data":"2026-07-22","ora":"16:00","oraOriginale":"16:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbtxcxap","fornitoreId":"forn02","data":"2026-07-22","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appi7kq1uy","fornitoreId":"forn12","data":"2026-07-23","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appmjkv5us","fornitoreId":"forn08","data":"2026-07-23","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxr2dhyl","fornitoreId":"forn10","data":"2026-07-23","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9tmqliz","fornitoreId":"forn09","data":"2026-07-23","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appghr09sk","fornitoreId":"forn16","data":"2026-07-23","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appze5r5uq","fornitoreId":"forn05","data":"2026-07-23","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ecruyf","fornitoreId":"forn03","data":"2026-07-23","ora":"08:30","oraOriginale":"08:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuovw1n6","fornitoreId":"forn07","data":"2026-07-23","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appzzqy72w","fornitoreId":"forn10","data":"2026-07-24","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx63cfl0","fornitoreId":"forn04","data":"2026-07-24","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkojtpv6","fornitoreId":"forn06","data":"2026-07-24","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4u89yjb","fornitoreId":"forn13","data":"2026-07-24","ora":"08:45","oraOriginale":"08:30","tipo":"carico","ritardoMin":15,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appk9p38qo","fornitoreId":"forn11","data":"2026-07-24","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyk83tql","fornitoreId":"forn02","data":"2026-07-24","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appa5qbswr","fornitoreId":"forn12","data":"2026-07-24","ora":"16:30","oraOriginale":"16:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7pze9vi","fornitoreId":"forn01","data":"2026-07-24","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4e8xf7k","fornitoreId":"forn17","data":"2026-07-24","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appitn7s55","fornitoreId":"forn15","data":"2026-07-24","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn759in4","fornitoreId":"forn06","data":"2026-07-27","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app3nx39rb","fornitoreId":"forn07","data":"2026-07-27","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4d6af58","fornitoreId":"forn12","data":"2026-07-27","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx444nlz","fornitoreId":"forn05","data":"2026-07-27","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw790pdw","fornitoreId":"forn13","data":"2026-07-27","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appblcmpio","fornitoreId":"forn11","data":"2026-07-27","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5wi6fqj","fornitoreId":"forn03","data":"2026-07-27","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppmvxpj4","fornitoreId":"forn09","data":"2026-07-27","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appmkza3oa","fornitoreId":"forn16","data":"2026-07-27","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app0361i2h","fornitoreId":"forn21","data":"2026-07-27","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app25nsjf6","fornitoreId":"forn12","data":"2026-07-28","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe8f8409","fornitoreId":"forn05","data":"2026-07-28","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appatqyyv3","fornitoreId":"forn10","data":"2026-07-28","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw7lvxwq","fornitoreId":"forn02","data":"2026-07-28","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8krd5eq","fornitoreId":"forn15","data":"2026-07-28","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appv05x4w7","fornitoreId":"forn17","data":"2026-07-28","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4dyt9mo","fornitoreId":"forn06","data":"2026-07-28","ora":"08:30","oraOriginale":"08:30","tipo":"scarico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appx8bm92h","fornitoreId":"forn13","data":"2026-07-28","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5lf6a4f","fornitoreId":"forn16","data":"2026-07-28","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app2sds8b2","fornitoreId":"forn02","data":"2026-07-29","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appb94pdzp","fornitoreId":"forn10","data":"2026-07-29","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appjwtl9tq","fornitoreId":"forn07","data":"2026-07-29","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx5t5p5o","fornitoreId":"forn03","data":"2026-07-29","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppxnf7c3","fornitoreId":"forn11","data":"2026-07-29","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appulemx15","fornitoreId":"forn05","data":"2026-07-29","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuhxid4n","fornitoreId":"forn09","data":"2026-07-29","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appu1wyuvx","fornitoreId":"forn17","data":"2026-07-29","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applma5uof","fornitoreId":"forn01","data":"2026-07-29","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnqfll7v","fornitoreId":"forn04","data":"2026-07-29","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyjxrpj1","fornitoreId":"forn12","data":"2026-07-29","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkerpeti","fornitoreId":"forn04","data":"2026-07-30","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ba75uu","fornitoreId":"forn12","data":"2026-07-30","ora":"09:00","oraOriginale":"09:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8g8qynp","fornitoreId":"forn08","data":"2026-07-30","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applmlgses","fornitoreId":"forn09","data":"2026-07-30","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxfdjgf1","fornitoreId":"forn07","data":"2026-07-30","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app1q7uww5","fornitoreId":"forn16","data":"2026-07-30","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw2vmcqb","fornitoreId":"forn03","data":"2026-07-30","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4wsqt26","fornitoreId":"forn10","data":"2026-07-30","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprfcd6mz","fornitoreId":"forn18","data":"2026-07-30","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9svn7n1","fornitoreId":"forn05","data":"2026-07-30","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcdyk0x6","fornitoreId":"forn01","data":"2026-07-30","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7lxxezd","fornitoreId":"forn15","data":"2026-07-30","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appy30ysxp","fornitoreId":"forn23","data":"2026-07-30","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app0sx5wvf","fornitoreId":"forn02","data":"2026-07-31","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppoyipk0","fornitoreId":"forn11","data":"2026-07-31","ora":"16:00","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app26gyup1","fornitoreId":"forn10","data":"2026-07-31","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app32ejx5t","fornitoreId":"forn12","data":"2026-07-31","ora":"12:00","oraOriginale":"12:00","tipo":"scarico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appj6fp8hq","fornitoreId":"forn03","data":"2026-07-31","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnncildz","fornitoreId":"forn01","data":"2026-07-31","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app3zezqac","fornitoreId":"forn06","data":"2026-07-31","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appp1ieixw","fornitoreId":"forn16","data":"2026-07-31","ora":"09:00","oraOriginale":"09:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appsifpwio","fornitoreId":"forn15","data":"2026-07-31","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8t2sa5b","fornitoreId":"forn05","data":"2026-07-31","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app2m0w10l","fornitoreId":"forn14","data":"2026-07-31","ora":"10:30","oraOriginale":"10:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appo3rbxk5","fornitoreId":"forn01","data":"2026-08-03","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app606n9rr","fornitoreId":"forn06","data":"2026-08-03","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppp9gkdl","fornitoreId":"forn11","data":"2026-08-03","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appymb5m9j","fornitoreId":"forn10","data":"2026-08-03","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn2y8fv2","fornitoreId":"forn02","data":"2026-08-03","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbfqnpce","fornitoreId":"forn09","data":"2026-08-03","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appe0rnujj","fornitoreId":"forn12","data":"2026-08-03","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appre4q6qd","fornitoreId":"forn17","data":"2026-08-03","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"apptkkfzzg","fornitoreId":"forn13","data":"2026-08-03","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe2atn2t","fornitoreId":"forn07","data":"2026-08-03","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe3tv1es","fornitoreId":"forn08","data":"2026-08-04","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appf7i8skc","fornitoreId":"forn02","data":"2026-08-04","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apptsg7fxz","fornitoreId":"forn06","data":"2026-08-04","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appc81jhuw","fornitoreId":"forn13","data":"2026-08-04","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appr2ykccp","fornitoreId":"forn12","data":"2026-08-04","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app5l9mo1s","fornitoreId":"forn05","data":"2026-08-04","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnwi5flu","fornitoreId":"forn04","data":"2026-08-04","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprla8s8h","fornitoreId":"forn07","data":"2026-08-04","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4ykadej","fornitoreId":"forn01","data":"2026-08-04","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuhtcs1k","fornitoreId":"forn16","data":"2026-08-04","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appelrqvsl","fornitoreId":"forn07","data":"2026-08-05","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4vssrur","fornitoreId":"forn03","data":"2026-08-05","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app20yar82","fornitoreId":"forn02","data":"2026-08-05","ora":"11:30","oraOriginale":"11:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprsz1n3i","fornitoreId":"forn13","data":"2026-08-05","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applfyo175","fornitoreId":"forn16","data":"2026-08-05","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appu9rn8qt","fornitoreId":"forn01","data":"2026-08-05","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxyvgiui","fornitoreId":"forn17","data":"2026-08-05","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyrru7zk","fornitoreId":"forn09","data":"2026-08-05","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app382kkzm","fornitoreId":"forn15","data":"2026-08-05","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app3jujd0i","fornitoreId":"forn10","data":"2026-08-05","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appozd1at7","fornitoreId":"forn08","data":"2026-08-05","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8lx6dut","fornitoreId":"forn19","data":"2026-08-05","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appk9tr74q","fornitoreId":"forn10","data":"2026-08-06","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appmkygvwo","fornitoreId":"forn05","data":"2026-08-06","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgfliji1","fornitoreId":"forn07","data":"2026-08-06","ora":"09:30","oraOriginale":"09:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appjmiyqfy","fornitoreId":"forn06","data":"2026-08-06","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw7nh8rq","fornitoreId":"forn16","data":"2026-08-06","ora":"14:30","oraOriginale":"14:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appqtxhi15","fornitoreId":"forn09","data":"2026-08-06","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe36htf4","fornitoreId":"forn18","data":"2026-08-06","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appds3qsqc","fornitoreId":"forn17","data":"2026-08-06","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app30ubmc9","fornitoreId":"forn08","data":"2026-08-06","ora":"08:00","oraOriginale":"08:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkgex08n","fornitoreId":"forn02","data":"2026-08-06","ora":"16:00","oraOriginale":"16:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnyxtxmg","fornitoreId":"forn15","data":"2026-08-06","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appg51bxw7","fornitoreId":"forn04","data":"2026-08-07","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbvzb0oi","fornitoreId":"forn05","data":"2026-08-07","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appi6uu13i","fornitoreId":"forn01","data":"2026-08-07","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appjuv0gyu","fornitoreId":"forn14","data":"2026-08-07","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applofn1r4","fornitoreId":"forn15","data":"2026-08-07","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcootnjl","fornitoreId":"forn17","data":"2026-08-07","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgjyv5g1","fornitoreId":"forn09","data":"2026-08-07","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6k6hg00","fornitoreId":"forn13","data":"2026-08-07","ora":"09:30","oraOriginale":"09:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appoilkqxl","fornitoreId":"forn07","data":"2026-08-07","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app01lhlb5","fornitoreId":"forn16","data":"2026-08-07","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appupfln4r","fornitoreId":"forn02","data":"2026-08-07","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appr00q0mf","fornitoreId":"forn22","data":"2026-08-07","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appohgi1jn","fornitoreId":"forn01","data":"2026-07-26","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyt7rpwh","fornitoreId":"forn02","data":"2026-07-26","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6nnyfx4","fornitoreId":"forn03","data":"2026-07-26","ora":"09:30","oraOriginale":"09:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appm8t1qoj","fornitoreId":"forn04","data":"2026-07-26","ora":"10:30","oraOriginale":"10:30","tipo":"carico","ritardoMin":10,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appah9tq6v","fornitoreId":"forn05","data":"2026-07-26","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9mh7f2v","fornitoreId":"forn01","data":"2026-07-26","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app97xbar3","fornitoreId":"forn06","data":"2026-07-26","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcpdlals","fornitoreId":"forn07","data":"2026-07-26","ora":"15:00","oraOriginale":"15:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph2bhjo1","fornitoreId":"forn08","data":"2026-07-26","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"}],"registro":[{"id":"logtg698s4","tipo":"info","testo":"Sistema avviato. 25 fornitori, 172 appuntamenti caricati.","meta":"2026-07-26T20:58:40.222541"},{"id":"logmz7e5v0","tipo":"info","testo":"Agenda di oggi caricata: 9 appuntamenti.","meta":"2026-07-26T20:58:58.913140"}],"chat":{}};
-  DEMO._version = VERSION;
-  DEMO._loadedAt = new Date().toISOString();
-
-  var demoStr = JSON.stringify(DEMO);
-  
-  try {
-    localStorage.setItem(KEY_L2, demoStr);
-    localStorage.setItem(KEY_APP, demoStr);
-    console.log('MGC v1.1.0: dati demo caricati —', 
-      DEMO.fornitori.length, 'fornitori,', 
-      DEMO.appuntamenti.length, 'appuntamenti');
-  } catch(e) {
-    console.warn('MGC: impossibile salvare dati demo:', e.message);
-  }
+    var ex=localStorage.getItem(KEY_L2);
+    if(ex){var d=JSON.parse(ex);if(d._version===VER){if(!localStorage.getItem(KEY_APP))localStorage.setItem(KEY_APP,ex);return;}}
+  } catch(e){}
+  var DEMO={"fornitori":[{"id":"forn01","nome":"Logistica Adriatica S.r.l.","referente":"Marco Verdi","telefono":"340 1000000","email":"logistica.adriatica.s.r.l@demo.it","password":"f01pass"},{"id":"forn02","nome":"Trasporti Bianchi & Figli","referente":"Giulia Neri","telefono":"341 1000137","email":"trasporti.bianchi.figli@demo.it","password":"f02pass"},{"id":"forn03","nome":"Eurofresh Distribuzione","referente":"Luca Russo","telefono":"342 1000274","email":"eurofresh.distribuzione@demo.it","password":"f03pass"},{"id":"forn04","nome":"Cargo Veneto S.p.A.","referente":"Sara Ferrari","telefono":"343 1000411","email":"cargo.veneto.s.p.a@demo.it","password":"f04pass"},{"id":"forn05","nome":"Alimentari del Sole S.r.l.","referente":"Davide Colombo","telefono":"344 1000548","email":"alimentari.del.sole.s.r.l@demo.it","password":"f05pass"},{"id":"forn06","nome":"Frigo Trans Italia","referente":"Elena Verdi","telefono":"345 1000685","email":"frigo.trans.italia@demo.it","password":"f06pass"},{"id":"forn07","nome":"Mercurio Spedizioni","referente":"Paolo Neri","telefono":"346 1000822","email":"mercurio.spedizioni@demo.it","password":"f07pass"},{"id":"forn08","nome":"Conserve Po Valley","referente":"Chiara Russo","telefono":"347 1000959","email":"conserve.po.valley@demo.it","password":"f08pass"},{"id":"forn09","nome":"Lattiero Caseario Rossi","referente":"Marco Ferrari","telefono":"348 1001096","email":"lattiero.caseario.rossi@demo.it","password":"f09pass"},{"id":"forn10","nome":"Tessile Nord S.r.l.","referente":"Giulia Colombo","telefono":"349 1001233","email":"tessile.nord.s.r.l@demo.it","password":"f10pass"},{"id":"forn11","nome":"Ferramenta Universale","referente":"Luca Verdi","telefono":"350 1001370","email":"ferramenta.universale@demo.it","password":"f11pass"},{"id":"forn12","nome":"Vini e Distillati Colle","referente":"Sara Neri","telefono":"351 1001507","email":"vini.e.distillati.colle@demo.it","password":"f12pass"},{"id":"forn13","nome":"Ortofrutta Mediterranea","referente":"Davide Russo","telefono":"352 1001644","email":"ortofrutta.mediterranea@demo.it","password":"f13pass"},{"id":"forn14","nome":"Plast Pack Imballaggi","referente":"Elena Ferrari","telefono":"353 1001781","email":"plast.pack.imballaggi@demo.it","password":"f14pass"},{"id":"forn15","nome":"Carta e Cartoni Esposito","referente":"Paolo Colombo","telefono":"354 1001918","email":"carta.e.cartoni.esposito@demo.it","password":"f15pass"},{"id":"forn16","nome":"Surgelati Stella Polare","referente":"Chiara Verdi","telefono":"355 1002055","email":"surgelati.stella.polare@demo.it","password":"f16pass"},{"id":"forn17","nome":"Bevande Group Italia","referente":"Marco Neri","telefono":"356 1002192","email":"bevande.group.italia@demo.it","password":"f17pass"},{"id":"forn18","nome":"Macelleria Industriale Tosi","referente":"Giulia Russo","telefono":"357 1002329","email":"macelleria.industriale.tosi@demo.it","password":"f18pass"},{"id":"forn19","nome":"Forno Centrale Distribuzione","referente":"Luca Ferrari","telefono":"358 1002466","email":"forno.centrale.distribuzione@demo.it","password":"f19pass"},{"id":"forn20","nome":"Chimica Verde S.r.l.","referente":"Sara Colombo","telefono":"359 1002603","email":"chimica.verde.s.r.l@demo.it","password":"f20pass"},{"id":"forn21","nome":"Elettroforniture Marini","referente":"Davide Verdi","telefono":"360 1002740","email":"elettroforniture.marini@demo.it","password":"f21pass"},{"id":"forn22","nome":"Pelletteria Conceria Lux","referente":"Elena Neri","telefono":"361 1002877","email":"pelletteria.conceria.lux@demo.it","password":"f22pass"},{"id":"forn23","nome":"Carni Pregiate Lombarde","referente":"Paolo Russo","telefono":"362 1003014","email":"carni.pregiate.lombarde@demo.it","password":"f23pass"},{"id":"forn24","nome":"Detergenza Professionale","referente":"Chiara Ferrari","telefono":"363 1003151","email":"detergenza.professionale@demo.it","password":"f24pass"},{"id":"forn25","nome":"Idrotermosanitaria Bassi","referente":"Marco Colombo","telefono":"364 1003288","email":"idrotermosanitaria.bassi@demo.it","password":"f25pass"}],"appuntamenti":[{"id":"appthv3a3z","fornitoreId":"forn09","data":"2026-07-16","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appdnmmjbq","fornitoreId":"forn03","data":"2026-07-16","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw5uzbik","fornitoreId":"forn02","data":"2026-07-16","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyzycwti","fornitoreId":"forn08","data":"2026-07-16","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuy41ibl","fornitoreId":"forn07","data":"2026-07-16","ora":"08:00","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph9sdbdw","fornitoreId":"forn07","data":"2026-07-17","ora":"08:00","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appvqjt7ye","fornitoreId":"forn08","data":"2026-07-17","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkfazz81","fornitoreId":"forn05","data":"2026-07-17","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxvf1t2t","fornitoreId":"forn02","data":"2026-07-17","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app93iiuc0","fornitoreId":"forn01","data":"2026-07-17","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8fsv871","fornitoreId":"forn14","data":"2026-07-17","ora":"16:05","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxpseimv","fornitoreId":"forn18","data":"2026-07-17","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appciyhe7u","fornitoreId":"forn09","data":"2026-07-17","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxmo5bxx","fornitoreId":"forn15","data":"2026-07-17","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apptb94874","fornitoreId":"forn02","data":"2026-07-20","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appfao72kz","fornitoreId":"forn05","data":"2026-07-20","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appghc0clb","fornitoreId":"forn11","data":"2026-07-20","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcgvyie6","fornitoreId":"forn12","data":"2026-07-20","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuljylje","fornitoreId":"forn14","data":"2026-07-20","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcq99chj","fornitoreId":"forn10","data":"2026-07-20","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appf4zw9xa","fornitoreId":"forn03","data":"2026-07-20","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appj60fkhm","fornitoreId":"forn08","data":"2026-07-20","ora":"14:30","oraOriginale":"14:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6bw3bme","fornitoreId":"forn09","data":"2026-07-20","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppac56t4","fornitoreId":"forn06","data":"2026-07-20","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6246hid","fornitoreId":"forn07","data":"2026-07-20","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7if2gog","fornitoreId":"forn18","data":"2026-07-20","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ixokc1","fornitoreId":"forn08","data":"2026-07-21","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appt7e8g8j","fornitoreId":"forn10","data":"2026-07-21","ora":"12:00","oraOriginale":"12:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9e6gbps","fornitoreId":"forn14","data":"2026-07-21","ora":"08:00","oraOriginale":"08:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyncxll4","fornitoreId":"forn13","data":"2026-07-21","ora":"16:00","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applztgxn0","fornitoreId":"forn05","data":"2026-07-21","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph2vlpys","fornitoreId":"forn09","data":"2026-07-21","ora":"10:00","oraOriginale":"10:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxwd8il3","fornitoreId":"forn18","data":"2026-07-21","ora":"09:40","oraOriginale":"09:30","tipo":"carico","ritardoMin":10,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5uznofy","fornitoreId":"forn16","data":"2026-07-21","ora":"15:35","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8sbi4q2","fornitoreId":"forn02","data":"2026-07-21","ora":"10:50","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":20,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6wzs3t6","fornitoreId":"forn17","data":"2026-07-21","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyzcotoh","fornitoreId":"forn09","data":"2026-07-22","ora":"11:05","oraOriginale":"11:00","tipo":"carico","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appur7ko64","fornitoreId":"forn11","data":"2026-07-22","ora":"08:20","oraOriginale":"08:00","tipo":"eccezionale","ritardoMin":20,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apphhpbmyo","fornitoreId":"forn14","data":"2026-07-22","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6vxdp5g","fornitoreId":"forn03","data":"2026-07-22","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn13jcat","fornitoreId":"forn10","data":"2026-07-22","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbbi4wir","fornitoreId":"forn07","data":"2026-07-22","ora":"09:45","oraOriginale":"09:30","tipo":"carico","ritardoMin":15,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgv0e38d","fornitoreId":"forn13","data":"2026-07-22","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7hv3izk","fornitoreId":"forn18","data":"2026-07-22","ora":"16:00","oraOriginale":"16:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbtxcxap","fornitoreId":"forn02","data":"2026-07-22","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appi7kq1uy","fornitoreId":"forn12","data":"2026-07-23","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appmjkv5us","fornitoreId":"forn08","data":"2026-07-23","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxr2dhyl","fornitoreId":"forn10","data":"2026-07-23","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9tmqliz","fornitoreId":"forn09","data":"2026-07-23","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appghr09sk","fornitoreId":"forn16","data":"2026-07-23","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appze5r5uq","fornitoreId":"forn05","data":"2026-07-23","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ecruyf","fornitoreId":"forn03","data":"2026-07-23","ora":"08:30","oraOriginale":"08:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuovw1n6","fornitoreId":"forn07","data":"2026-07-23","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appzzqy72w","fornitoreId":"forn10","data":"2026-07-24","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx63cfl0","fornitoreId":"forn04","data":"2026-07-24","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkojtpv6","fornitoreId":"forn06","data":"2026-07-24","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4u89yjb","fornitoreId":"forn13","data":"2026-07-24","ora":"08:45","oraOriginale":"08:30","tipo":"carico","ritardoMin":15,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appk9p38qo","fornitoreId":"forn11","data":"2026-07-24","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyk83tql","fornitoreId":"forn02","data":"2026-07-24","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appa5qbswr","fornitoreId":"forn12","data":"2026-07-24","ora":"16:30","oraOriginale":"16:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7pze9vi","fornitoreId":"forn01","data":"2026-07-24","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4e8xf7k","fornitoreId":"forn17","data":"2026-07-24","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appitn7s55","fornitoreId":"forn15","data":"2026-07-24","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn759in4","fornitoreId":"forn06","data":"2026-07-27","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app3nx39rb","fornitoreId":"forn07","data":"2026-07-27","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4d6af58","fornitoreId":"forn12","data":"2026-07-27","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx444nlz","fornitoreId":"forn05","data":"2026-07-27","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw790pdw","fornitoreId":"forn13","data":"2026-07-27","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appblcmpio","fornitoreId":"forn11","data":"2026-07-27","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5wi6fqj","fornitoreId":"forn03","data":"2026-07-27","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppmvxpj4","fornitoreId":"forn09","data":"2026-07-27","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appmkza3oa","fornitoreId":"forn16","data":"2026-07-27","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app0361i2h","fornitoreId":"forn21","data":"2026-07-27","ora":"15:30","oraOriginale":"15:30","tipo":"entrambi","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app25nsjf6","fornitoreId":"forn12","data":"2026-07-28","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe8f8409","fornitoreId":"forn05","data":"2026-07-28","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appatqyyv3","fornitoreId":"forn10","data":"2026-07-28","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw7lvxwq","fornitoreId":"forn02","data":"2026-07-28","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8krd5eq","fornitoreId":"forn15","data":"2026-07-28","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appv05x4w7","fornitoreId":"forn17","data":"2026-07-28","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4dyt9mo","fornitoreId":"forn06","data":"2026-07-28","ora":"08:30","oraOriginale":"08:30","tipo":"scarico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appx8bm92h","fornitoreId":"forn13","data":"2026-07-28","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5lf6a4f","fornitoreId":"forn16","data":"2026-07-28","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app2sds8b2","fornitoreId":"forn02","data":"2026-07-29","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appb94pdzp","fornitoreId":"forn10","data":"2026-07-29","ora":"11:30","oraOriginale":"11:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appjwtl9tq","fornitoreId":"forn07","data":"2026-07-29","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appx5t5p5o","fornitoreId":"forn03","data":"2026-07-29","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppxnf7c3","fornitoreId":"forn11","data":"2026-07-29","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appulemx15","fornitoreId":"forn05","data":"2026-07-29","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuhxid4n","fornitoreId":"forn09","data":"2026-07-29","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appu1wyuvx","fornitoreId":"forn17","data":"2026-07-29","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applma5uof","fornitoreId":"forn01","data":"2026-07-29","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnqfll7v","fornitoreId":"forn04","data":"2026-07-29","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyjxrpj1","fornitoreId":"forn12","data":"2026-07-29","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkerpeti","fornitoreId":"forn04","data":"2026-07-30","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app5ba75uu","fornitoreId":"forn12","data":"2026-07-30","ora":"09:00","oraOriginale":"09:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8g8qynp","fornitoreId":"forn08","data":"2026-07-30","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applmlgses","fornitoreId":"forn09","data":"2026-07-30","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxfdjgf1","fornitoreId":"forn07","data":"2026-07-30","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app1q7uww5","fornitoreId":"forn16","data":"2026-07-30","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw2vmcqb","fornitoreId":"forn03","data":"2026-07-30","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4wsqt26","fornitoreId":"forn10","data":"2026-07-30","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprfcd6mz","fornitoreId":"forn18","data":"2026-07-30","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9svn7n1","fornitoreId":"forn05","data":"2026-07-30","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcdyk0x6","fornitoreId":"forn01","data":"2026-07-30","ora":"10:00","oraOriginale":"10:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app7lxxezd","fornitoreId":"forn15","data":"2026-07-30","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appy30ysxp","fornitoreId":"forn23","data":"2026-07-30","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app0sx5wvf","fornitoreId":"forn02","data":"2026-07-31","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppoyipk0","fornitoreId":"forn11","data":"2026-07-31","ora":"16:00","oraOriginale":"16:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app26gyup1","fornitoreId":"forn10","data":"2026-07-31","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app32ejx5t","fornitoreId":"forn12","data":"2026-07-31","ora":"12:00","oraOriginale":"12:00","tipo":"scarico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appj6fp8hq","fornitoreId":"forn03","data":"2026-07-31","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnncildz","fornitoreId":"forn01","data":"2026-07-31","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app3zezqac","fornitoreId":"forn06","data":"2026-07-31","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appp1ieixw","fornitoreId":"forn16","data":"2026-07-31","ora":"09:00","oraOriginale":"09:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appsifpwio","fornitoreId":"forn15","data":"2026-07-31","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8t2sa5b","fornitoreId":"forn05","data":"2026-07-31","ora":"08:00","oraOriginale":"08:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app2m0w10l","fornitoreId":"forn14","data":"2026-07-31","ora":"10:30","oraOriginale":"10:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appo3rbxk5","fornitoreId":"forn01","data":"2026-08-03","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app606n9rr","fornitoreId":"forn06","data":"2026-08-03","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apppp9gkdl","fornitoreId":"forn11","data":"2026-08-03","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appymb5m9j","fornitoreId":"forn10","data":"2026-08-03","ora":"15:00","oraOriginale":"15:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appn2y8fv2","fornitoreId":"forn02","data":"2026-08-03","ora":"15:30","oraOriginale":"15:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbfqnpce","fornitoreId":"forn09","data":"2026-08-03","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appe0rnujj","fornitoreId":"forn12","data":"2026-08-03","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appre4q6qd","fornitoreId":"forn17","data":"2026-08-03","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"apptkkfzzg","fornitoreId":"forn13","data":"2026-08-03","ora":"10:30","oraOriginale":"10:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe2atn2t","fornitoreId":"forn07","data":"2026-08-03","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe3tv1es","fornitoreId":"forn08","data":"2026-08-04","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appf7i8skc","fornitoreId":"forn02","data":"2026-08-04","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apptsg7fxz","fornitoreId":"forn06","data":"2026-08-04","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appc81jhuw","fornitoreId":"forn13","data":"2026-08-04","ora":"15:00","oraOriginale":"15:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appr2ykccp","fornitoreId":"forn12","data":"2026-08-04","ora":"16:30","oraOriginale":"16:30","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app5l9mo1s","fornitoreId":"forn05","data":"2026-08-04","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnwi5flu","fornitoreId":"forn04","data":"2026-08-04","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprla8s8h","fornitoreId":"forn07","data":"2026-08-04","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4ykadej","fornitoreId":"forn01","data":"2026-08-04","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appuhtcs1k","fornitoreId":"forn16","data":"2026-08-04","ora":"14:00","oraOriginale":"14:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appelrqvsl","fornitoreId":"forn07","data":"2026-08-05","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app4vssrur","fornitoreId":"forn03","data":"2026-08-05","ora":"09:30","oraOriginale":"09:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app20yar82","fornitoreId":"forn02","data":"2026-08-05","ora":"11:30","oraOriginale":"11:30","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apprsz1n3i","fornitoreId":"forn13","data":"2026-08-05","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applfyo175","fornitoreId":"forn16","data":"2026-08-05","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appu9rn8qt","fornitoreId":"forn01","data":"2026-08-05","ora":"10:30","oraOriginale":"10:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appxyvgiui","fornitoreId":"forn17","data":"2026-08-05","ora":"11:00","oraOriginale":"11:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyrru7zk","fornitoreId":"forn09","data":"2026-08-05","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app382kkzm","fornitoreId":"forn15","data":"2026-08-05","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"app3jujd0i","fornitoreId":"forn10","data":"2026-08-05","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appozd1at7","fornitoreId":"forn08","data":"2026-08-05","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app8lx6dut","fornitoreId":"forn19","data":"2026-08-05","ora":"14:00","oraOriginale":"14:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appk9tr74q","fornitoreId":"forn10","data":"2026-08-06","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appmkygvwo","fornitoreId":"forn05","data":"2026-08-06","ora":"08:30","oraOriginale":"08:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgfliji1","fornitoreId":"forn07","data":"2026-08-06","ora":"09:30","oraOriginale":"09:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appjmiyqfy","fornitoreId":"forn06","data":"2026-08-06","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appw7nh8rq","fornitoreId":"forn16","data":"2026-08-06","ora":"14:30","oraOriginale":"14:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appqtxhi15","fornitoreId":"forn09","data":"2026-08-06","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appe36htf4","fornitoreId":"forn18","data":"2026-08-06","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appds3qsqc","fornitoreId":"forn17","data":"2026-08-06","ora":"09:00","oraOriginale":"09:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app30ubmc9","fornitoreId":"forn08","data":"2026-08-06","ora":"08:00","oraOriginale":"08:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appkgex08n","fornitoreId":"forn02","data":"2026-08-06","ora":"16:00","oraOriginale":"16:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appnyxtxmg","fornitoreId":"forn15","data":"2026-08-06","ora":"15:00","oraOriginale":"15:00","tipo":"entrambi","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appg51bxw7","fornitoreId":"forn04","data":"2026-08-07","ora":"15:30","oraOriginale":"15:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appbvzb0oi","fornitoreId":"forn05","data":"2026-08-07","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appi6uu13i","fornitoreId":"forn01","data":"2026-08-07","ora":"16:00","oraOriginale":"16:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appjuv0gyu","fornitoreId":"forn14","data":"2026-08-07","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"applofn1r4","fornitoreId":"forn15","data":"2026-08-07","ora":"14:30","oraOriginale":"14:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcootnjl","fornitoreId":"forn17","data":"2026-08-07","ora":"10:00","oraOriginale":"10:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appgjyv5g1","fornitoreId":"forn09","data":"2026-08-07","ora":"08:00","oraOriginale":"08:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6k6hg00","fornitoreId":"forn13","data":"2026-08-07","ora":"09:30","oraOriginale":"09:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appoilkqxl","fornitoreId":"forn07","data":"2026-08-07","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app01lhlb5","fornitoreId":"forn16","data":"2026-08-07","ora":"16:30","oraOriginale":"16:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appupfln4r","fornitoreId":"forn02","data":"2026-08-07","ora":"11:00","oraOriginale":"11:00","tipo":"carico","ritardoMin":0,"stato":"in_attesa","note":"","creatoDa":"sistema"},{"id":"appr00q0mf","fornitoreId":"forn22","data":"2026-08-07","ora":"12:00","oraOriginale":"12:00","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appohgi1jn","fornitoreId":"forn01","data":"2026-07-26","ora":"08:30","oraOriginale":"08:30","tipo":"carico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appyt7rpwh","fornitoreId":"forn02","data":"2026-07-26","ora":"09:00","oraOriginale":"09:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app6nnyfx4","fornitoreId":"forn03","data":"2026-07-26","ora":"09:30","oraOriginale":"09:30","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appm8t1qoj","fornitoreId":"forn04","data":"2026-07-26","ora":"10:30","oraOriginale":"10:30","tipo":"carico","ritardoMin":10,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appah9tq6v","fornitoreId":"forn05","data":"2026-07-26","ora":"11:30","oraOriginale":"11:30","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app9mh7f2v","fornitoreId":"forn01","data":"2026-07-26","ora":"14:00","oraOriginale":"14:00","tipo":"entrambi","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"app97xbar3","fornitoreId":"forn06","data":"2026-07-26","ora":"14:30","oraOriginale":"14:30","tipo":"carico","ritardoMin":5,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"appcpdlals","fornitoreId":"forn07","data":"2026-07-26","ora":"15:00","oraOriginale":"15:00","tipo":"eccezionale","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"},{"id":"apph2bhjo1","fornitoreId":"forn08","data":"2026-07-26","ora":"16:00","oraOriginale":"16:00","tipo":"scarico","ritardoMin":0,"stato":"confermato","note":"","creatoDa":"sistema"}],"registro":[{"id":"logtg698s4","tipo":"info","testo":"Sistema avviato. 25 fornitori, 172 appuntamenti caricati.","meta":"2026-07-26T20:58:40.222541"},{"id":"logmz7e5v0","tipo":"info","testo":"Agenda di oggi caricata: 9 appuntamenti.","meta":"2026-07-26T20:58:58.913140"}],"chat":{}};
+  DEMO._version=VER; DEMO._loadedAt=new Date().toISOString();
+  var s=JSON.stringify(DEMO);
+  try{localStorage.setItem(KEY_L2,s);localStorage.setItem(KEY_APP,s);
+    console.log('MGC v1.2.0: '+DEMO.fornitori.length+' fornitori, '+DEMO.appuntamenti.length+' appuntamenti');
+  }catch(e){}
 })();
-
 </script>
-
 <script>(function(){
-// Sessione gestita da MGC
-function logout(){if(typeof MGC!=='undefined'){MGC.hideApp();}else{sessionStorage.clear();location.href='index.html';}}
-
+// sessione gestita da MGC
+function logout(){ if(typeof MGC!=="undefined"){ MGC.hideApp(); } else { location.href="index.html"; } }
 
 function getData(){try{return JSON.parse(localStorage.getItem('mgc-app-v1'))||{fornitori:[],appuntamenti:[],registro:[]}}catch(e){return{fornitori:[],appuntamenti:[],registro:[]}}}
 function saveData(d){localStorage.setItem('mgc-app-v1',JSON.stringify(d));}
@@ -1797,7 +1589,7 @@ function slotOccupatiDa(a){const n=TIPO_SLOT[a.tipo];const r=[];let t=a.oraOrigi
 document.querySelectorAll('[data-view]').forEach(el=>{
   el.addEventListener('click',()=>{
     document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===el.dataset.view));
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('#layer-l0 .lpage').forEach(p=>p.classList.remove('active'));
     document.getElementById('page-'+el.dataset.view).classList.add('active');
     renders[el.dataset.view]?.();
   });
@@ -1878,7 +1670,7 @@ function deleteAppt(id){
 // ── UTENTI ───────────────────────────────────────────────
 function renderUtenti(){
   const D=getData();
-  (document.getElementById('forn-count') || {}).textContent = `${D.fornitori.length} fornitori`;
+  document.getElementById('forn-count').textContent=`${D.fornitori.length} fornitori`;
   document.getElementById('forn-tbody').innerHTML=D.fornitori.map(f=>`
     <tr>
       <td style="font-family:monospace;color:var(--text2);">${f.id}</td>
@@ -1905,7 +1697,7 @@ function renderRegistro(){
 // ── RAW DATA ─────────────────────────────────────────────
 function renderRaw(){
   const D=getData();
-  (document.getElementById('json-view') || {}).textContent = JSON.stringify(D,null,2);
+  document.getElementById('json-view').textContent=JSON.stringify(D,null,2);
 }
 function copyJson(){navigator.clipboard.writeText(document.getElementById('json-view').textContent).then(()=>alert('Copiato!'));}
 function exportJson(){
@@ -1958,19 +1750,25 @@ function aggiungiManuale(){
   saveData(D); alert('Appuntamento aggiunto.'); renderAppuntamenti();
 }
 
-// INIT→_mgcI0
+// ── INIT ──────────────────────────────────────────────────
+renderOverview();
+document.getElementById('man-data').value=toDS(new Date());
 
 window._mgcI0 = function(username, fId) {
   renderOverview();
 };
 })();</script>
 <script>(function(){
-// Sessione gestita da MGC
-function logout(){if(typeof MGC!=='undefined'){MGC.hideApp();}else{sessionStorage.clear();location.href='index.html';}}
+// ── SESSIONE ────────────────────────────────────────────────
+// sessione gestita da MGC
+const initials = 'direttore'.split(/[.\s]/).filter(Boolean).slice(0,2).map(s=>s[0].toUpperCase()).join('')||'MB';
+document.getElementById('top-av').textContent = initials;
+document.getElementById('sb-av').textContent = initials;
+if(document.getElementById('sb-name')) document.getElementById('sb-name').textContent = 'direttore';
+function logout(){ if(typeof MGC!=="undefined"){ MGC.hideApp(); } else { location.href="index.html"; } }
 
 // ── DATI ────────────────────────────────────────────────────
-const STORAGE_KEY='mgc-app-v1';
-function getData(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{fornitori:[],appuntamenti:[],registro:[]}}catch(e){return{fornitori:[],appuntamenti:[],registro:[]}} }
+function getData(){ try{return JSON.parse(localStorage.getItem('mgc-app-v1'))||{fornitori:[],appuntamenti:[],registro:[]}}catch(e){return{fornitori:[],appuntamenti:[],registro:[]}} }
 
 // ── UTILS ───────────────────────────────────────────────────
 function pad(n){return n.toString().padStart(2,'0');}
@@ -1998,8 +1796,8 @@ document.querySelectorAll('[data-view]').forEach(el=>{
 function switchView(v){
   currentView=v;
   document.querySelectorAll('.bn[data-view],.sb-item[data-view]').forEach(el=>el.classList.toggle('active',el.dataset.view===v));
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+v).classList.add('active');
+  document.querySelectorAll('#layer-l1 .lpage').forEach(p=>p.classList.remove('active'));
+  document.querySelector('#layer-l1 #page-'+v).classList.add('active');
   if(v==='dashboard') renderDashboard();
   else if(v==='agenda') renderAgenda();
   else if(v==='report') renderReport();
@@ -2017,14 +1815,14 @@ function renderDashboard(){
   const totMese=D.appuntamenti.filter(a=>{const d=new Date(a.data+'T00:00:00');return d.getMonth()===new Date().getMonth()&&d.getFullYear()===new Date().getFullYear()&&a.stato==='confermato';}).length;
 
   document.getElementById('dash-stats').innerHTML=`
-    <div class="stat"><div class="lbl">Oggi</div><div class="val">${apptOggi.length}</div><div class="sub">appuntamenti</div></div>
-    <div class="stat"><div class="lbl">Domani</div><div class="val">${apptDomani.length}</div><div class="sub">previsti</div></div>
-    <div class="stat"><div class="lbl">Questa settimana</div><div class="val v">${apptSett.length}</div><div class="sub">confermati</div></div>
-    <div class="stat"><div class="lbl">Ritardi attivi</div><div class="val ${ritardi.length>0?'a':''}">${ritardi.length}</div><div class="sub">${ritardi.length>0?'in corso':'nessuno'}</div></div>
-    <div class="stat"><div class="lbl">Questo mese</div><div class="val">${totMese}</div><div class="sub">movimenti</div></div>
-    <div class="stat"><div class="lbl">Fornitori</div><div class="val">${D.fornitori.length}</div><div class="sub">abilitati</div></div>
+    <div class="stat-card"><div class="sc-lbl">Oggi</div><div class="sc-val">${apptOggi.length}</div><div class="sc-sub">appuntamenti</div></div>
+    <div class="stat-card"><div class="sc-lbl">Domani</div><div class="sc-val">${apptDomani.length}</div><div class="sc-sub">previsti</div></div>
+    <div class="stat-card"><div class="sc-lbl">Questa settimana</div><div class="sc-val blu">${apptSett.length}</div><div class="sc-sub">confermati</div></div>
+    <div class="stat-card"><div class="sc-lbl">Ritardi attivi</div><div class="sc-val ${ritardi.length>0?'ambra':''}">${ritardi.length}</div><div class="sc-sub">${ritardi.length>0?'in corso':'nessuno'}</div></div>
+    <div class="stat-card"><div class="sc-lbl">Questo mese</div><div class="sc-val">${totMese}</div><div class="sc-sub">movimenti</div></div>
+    <div class="stat-card"><div class="sc-lbl">Fornitori</div><div class="sc-val">${D.fornitori.length}</div><div class="sc-sub">abilitati</div></div>
   `;
-  (document.getElementById('dash-data-oggi') || {}).textContent = fmtLong(oggi);
+  document.getElementById('dash-data-oggi').textContent=fmtLong(oggi);
 
   // Flusso oggi — barre per fascia oraria
   const mattinaCount=apptOggi.filter(a=>['08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30'].includes(a.oraOriginale)).length;
@@ -2074,8 +1872,8 @@ function renderDashboard(){
 // ── AGENDA ─────────────────────────────────────────────────
 function renderAgenda(){
   const D=getData();
-  (document.getElementById('l4-ag-d1') || {}).textContent = new Date(currentDate+'T00:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'short'});
-  (document.getElementById('l4-ag-d2') || {}).textContent = fmtLong(currentDate);
+  document.getElementById('ag-d1').textContent=new Date(currentDate+'T00:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'short'});
+  document.getElementById('ag-d2').textContent=fmtLong(currentDate);
   const appts=D.appuntamenti.filter(a=>a.data===currentDate&&a.stato==='confermato').sort((a,b)=>a.ora.localeCompare(b.ora));
   if(appts.length===0){
     document.getElementById('ag-content').innerHTML=`<div class="card"><div class="card-body"><div class="empty"><div class="ico">📋</div><div class="t">Nessun appuntamento</div></div></div></div>`;
@@ -2226,13 +2024,9 @@ function renderFornitori(){
   `;
 }
 
-// INIT→_mgcI1
-
+// ── INIT ────────────────────────────────────────────────────
 window._mgcI1 = function(username, fId) {
-  var ini=(username||'MB').split(/[.\s]/).filter(Boolean).slice(0,2).map(function(s){return s[0].toUpperCase();}).join('')||'MB';
-  var av=document.getElementById('top-av'); if(av) av.textContent=ini;
-  var sav=document.getElementById('sb-av'); if(sav) sav.textContent=ini;
-  var snm=document.getElementById('sb-name'); if(snm) snm.textContent=username||'';
+  var ini=(username||'D').split(/[.\s]/).filter(Boolean).slice(0,2).map(function(s){return s[0].toUpperCase();}).join('')||'D';
   currentDate=new Date().toISOString().slice(0,10);
   renderDashboard();
 };
@@ -2381,12 +2175,10 @@ function showToast(msg, kind){
 // LOGIN
 // ============================================================
 /* login→MGC */function doLogout(){
-  if(typeof MGC!=='undefined'){MGC.hideApp();}
-  else{document.getElementById('app').classList.remove('active');
-    document.getElementById('login-screen').style.display='flex';}
+  if(typeof MGC!=='undefined'){MGC.hideApp();}else{document.getElementById('app').classList.remove('active');document.getElementById('login-screen').style.display='flex';}
 }
-document.getElementById('sb-logout-btn')?.addEventListener('click', doLogout);
-document.getElementById('logout-btn-mobile')?.addEventListener('click', doLogout);
+document.getElementById('sb-logout-btn').addEventListener('click', doLogout);
+document.getElementById('logout-btn-mobile').addEventListener('click', doLogout);
 
 // ============================================================
 // NAVIGATION (sidebar desktop + bottom nav mobile, stesso stato)
@@ -2403,8 +2195,8 @@ function switchView(view){
   if (view !== 'chat') chatFornitoreAttivo = null;
   document.querySelectorAll('.sb-nav-item[data-view]').forEach(i => i.classList.toggle('active', i.dataset.view === view));
   document.querySelectorAll('.bn-item[data-view]').forEach(i => i.classList.toggle('active', i.dataset.view === view));
-  document.querySelectorAll('#layer-l2 .page').forEach(p => p.classList.remove('active'));
-  document.querySelector('#layer-l2 #page-' + view)?.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelector('#layer-l2 #page-'+view).classList.add('active');
   renderView(view);
 }
 
@@ -2431,7 +2223,7 @@ function fornitoreById(id){ return DATA.fornitori.find(f => f.id === id); }
 // AGENDA
 // ============================================================
 function renderAgenda(){
-  const grid = document.querySelector('#layer-l2 #stats-grid');
+  const grid = document.getElementById('stats-grid');
   const appDelGiorno = DATA.appuntamenti.filter(a => a.data === currentDate && a.stato === 'confermato').sort((a,b) => timeToMin(a.oraOriginale) - timeToMin(b.oraOriginale));
   const slots = generaSlotsGiorno();
   const slotsMattina = slots.filter(s => s.periodo === 'mattina');
@@ -2468,7 +2260,7 @@ function renderAgenda(){
   document.getElementById('day-nav-d2').textContent = fmtDateLong(currentDate);
   document.getElementById('agenda-date-picker').value = currentDate;
 
-  const slotsContainer = document.querySelector('#layer-l2 #agenda-slots');
+  const slotsContainer = document.getElementById('agenda-slots');
   slotsContainer.innerHTML = `
     <div class="fascia-header">
       <span class="ftitle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>Mattina</span>
@@ -2546,22 +2338,22 @@ function renderSlotRow(slot, appDelGiorno){
 }
 
 function shiftDay(delta){ const d = new Date(currentDate + 'T00:00:00'); d.setDate(d.getDate() + delta); currentDate = toDateStr(d); renderAgenda(); }
-document.getElementById('btn-prev-day')?.addEventListener('click', () => shiftDay(-1));
-document.getElementById('btn-next-day')?.addEventListener('click', () => shiftDay(1));
-document.getElementById('btn-today')?.addEventListener('click', () => { currentDate = toDateStr(new Date()); chiudiCalendario(); renderAgenda(); });
-document.getElementById('agenda-date-picker')?.addEventListener('change', (e) => { currentDate = e.target.value; renderAgenda(); });
+document.getElementById('btn-prev-day').addEventListener('click', () => shiftDay(-1));
+document.getElementById('btn-next-day').addEventListener('click', () => shiftDay(1));
+document.getElementById('btn-today').addEventListener('click', () => { currentDate = toDateStr(new Date()); chiudiCalendario(); renderAgenda(); });
+document.getElementById('agenda-date-picker').addEventListener('change', (e) => { currentDate = e.target.value; renderAgenda(); });
 
 // ============================================================
 // CALENDARIO POPUP VISIVO
 // ============================================================
 let calViewYear = null, calViewMonth = null, calPopupOpen = false;
 
-document.getElementById('btn-cal-toggle')?.addEventListener('click', (e) => {
+document.getElementById('btn-cal-toggle').addEventListener('click', (e) => {
   e.stopPropagation();
   toggleCalendario();
 });
 
-document.getElementById('day-nav-label-wrap')?.addEventListener('click', (e) => {
+document.getElementById('day-nav-label-wrap').addEventListener('click', (e) => {
   if (e.target.tagName === 'INPUT') return;
 });
 
@@ -2651,8 +2443,8 @@ function renderCalendario(){
     });
   }, 50);
 }
-document.getElementById('fab-nuovo')?.addEventListener('click', () => openModalNuovo());
-document.getElementById('btn-nuovo-desktop')?.addEventListener('click', () => openModalNuovo());
+document.getElementById('fab-nuovo').addEventListener('click', () => openModalNuovo());
+document.getElementById('btn-nuovo-desktop').addEventListener('click', () => openModalNuovo());
 
 // ============================================================
 // ELENCO APPUNTAMENTI
@@ -2841,11 +2633,11 @@ function aggiornaDisponibilitaEccezionale(){
   if (!consentito && tipoSel.value === 'eccezionale') tipoSel.value = 'carico';
 }
 
-document.getElementById('nf-ora')?.addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
-document.getElementById('nf-data')?.addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
-document.getElementById('nf-tipo')?.addEventListener('change', function(){ document.getElementById('nf-slot-error').style.display = 'none'; });
+document.getElementById('nf-ora').addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
+document.getElementById('nf-data').addEventListener('change', function(){ aggiornaDisponibilitaEccezionale(); aggiornaRiepilogoNuovo(); });
+document.getElementById('nf-tipo').addEventListener('change', function(){ document.getElementById('nf-slot-error').style.display = 'none'; });
 
-document.getElementById('nf-confirm')?.addEventListener('click', async function(){
+document.getElementById('nf-confirm').addEventListener('click', async function(){
   const pwd = document.getElementById('nf-pwd').value;
   if (pwd !== '2580'){ document.getElementById('nf-pwd-error').style.display = 'block'; return; }
   document.getElementById('nf-pwd-error').style.display = 'none';
@@ -2947,11 +2739,11 @@ function openModalDettaglio(apptId){
     </button>
   `;
 
-  document.getElementById('det-btn-ritardo')?.addEventListener('click', () => {
+  document.getElementById('det-btn-ritardo').addEventListener('click', () => {
     closeModal('modal-dettaglio');
     setTimeout(() => openModalRitardo(apptId), 120);
   });
-  document.getElementById('det-btn-cancella')?.addEventListener('click', () => {
+  document.getElementById('det-btn-cancella').addEventListener('click', () => {
     closeModal('modal-dettaglio');
     setTimeout(() => openModalCancella(apptId), 120);
   });
@@ -2970,7 +2762,7 @@ function openModalCancella(apptId){
   document.getElementById('modal-cancella').classList.add('active');
 }
 
-document.getElementById('ca-confirm')?.addEventListener('click', async function(){
+document.getElementById('ca-confirm').addEventListener('click', async function(){
   const pwd = document.getElementById('ca-pwd').value;
   if (pwd !== '2580'){ document.getElementById('ca-pwd-error').style.display = 'block'; return; }
   const a = DATA.appuntamenti.find(x => x.id === pendingAction.apptId);
@@ -3019,7 +2811,7 @@ function openModalRitardo(apptId){
   document.getElementById('modal-ritardo').classList.add('active');
 }
 
-document.getElementById('rt-confirm')?.addEventListener('click', async function(){
+document.getElementById('rt-confirm').addEventListener('click', async function(){
   const minuti = parseInt(document.getElementById('rt-minuti').value, 10);
   const a = DATA.appuntamenti.find(x => x.id === pendingAction.apptId);
   const f = fornitoreById(a.fornitoreId);
@@ -3178,12 +2970,12 @@ function renderChatWindow(fornitoreId, cont){
   const area = document.getElementById('chat-msgs-area');
   area.scrollTop = area.scrollHeight;
 
-  document.getElementById('chat-back-btn')?.addEventListener('click', () => {
+  document.getElementById('chat-back-btn').addEventListener('click', () => {
     chatFornitoreAttivo = null; renderChat();
   });
 
   function invia(){
-    const inp = document.querySelector('#layer-l2 #chat-input');
+    const inp = document.getElementById('chat-input');
     const testo = inp.value.trim();
     if (!testo) return;
     if (!DATA.chat[fornitoreId]) DATA.chat[fornitoreId] = { msgs: [] };
@@ -3219,8 +3011,8 @@ function renderChatWindow(fornitoreId, cont){
     }, 2000 + Math.random()*2000);
   }
 
-  document.getElementById('chat-send-btn')?.addEventListener('click', invia);
-  document.querySelector('#layer-l2 #chat-input')?.addEventListener('keydown', (e) => { if(e.key==='Enter') invia(); });
+  document.getElementById('chat-send-btn').addEventListener('click', invia);
+  document.getElementById('chat-input').addEventListener('keydown', (e) => { if(e.key==='Enter') invia(); });
 }
 
 function aggiornaBadgeChat(){
@@ -3381,9 +3173,10 @@ window._mgcI2 = async function(username, fId) {
 })();
 </script>
 <script>(function(){
-// Sessione gestita da MGC
-function logout(){if(typeof MGC!=='undefined'){MGC.hideApp();}else{sessionStorage.clear();location.href='index.html';}}
-
+// sessione gestita da MGC
+const initials='guardiola'.split(/[.\s]/).filter(Boolean).slice(0,2).map(s=>s[0].toUpperCase()).join('')||'GV';
+document.getElementById('top-av').textContent=initials;
+function logout(){ if(typeof MGC!=="undefined"){ MGC.hideApp(); } else { location.href="index.html"; } }
 
 function getData(){try{return JSON.parse(localStorage.getItem('mgc-app-v1'))||{fornitori:[],appuntamenti:[]}}catch(e){return{fornitori:[],appuntamenti:[]}}}
 function pad(n){return n.toString().padStart(2,'0');}
@@ -3399,8 +3192,8 @@ let currentDate=toDS(new Date());
 
 function switchView(v){
   document.querySelectorAll('.bn[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+v).classList.add('active');
+  document.querySelectorAll('#layer-l3 .lpage').forEach(p=>p.classList.remove('active'));
+  document.querySelector('#layer-l3 #page-'+v).classList.add('active');
   if(v==='oggi') renderAgenda();
   else if(v==='cerca') renderCerca('');
 }
@@ -3408,8 +3201,8 @@ document.querySelectorAll('.bn[data-view]').forEach(b=>b.addEventListener('click
 
 function renderAgenda(){
   const D=getData();
-  (document.getElementById('l4-ag-d1') || {}).textContent = fmtMed(currentDate);
-  (document.getElementById('l4-ag-d2') || {}).textContent = fmtLong(currentDate);
+  document.getElementById('ag3-d1').textContent=fmtMed(currentDate);
+  document.getElementById('ag3-d2').textContent=fmtLong(currentDate);
 
   const oggi=toDS(new Date());
   const isOggi=currentDate===oggi;
@@ -3519,11 +3312,10 @@ function renderCerca(q){
   }).join('');
 }
 
-document.getElementById('btn-prev')?.addEventListener('click',()=>{currentDate=addDays(currentDate,-1);renderAgenda();});
-document.getElementById('btn-next')?.addEventListener('click',()=>{currentDate=addDays(currentDate,1);renderAgenda();});
-document.getElementById('btn-oggi')?.addEventListener('click',()=>{currentDate=toDS(new Date());renderAgenda();});
-document.querySelector('#layer-l3 #search-input').addEventListener('input',e=>renderCerca(e.target.value));
-
+document.getElementById('ag-btn-prev')?.addEventListener('click',()=>{currentDate=addDays(currentDate,-1);renderAgenda();});
+document.getElementById('ag-btn-next')?.addEventListener('click',()=>{currentDate=addDays(currentDate,1);renderAgenda();});
+document.getElementById('ag-btn-oggi')?.addEventListener('click',()=>{currentDate=toDS(new Date());renderAgenda();});
+document.getElementById('search-input')?.addEventListener('input',e=>renderCerca(e.target.value));
 
 window._mgcI3 = function(username, fId) {
   var ini=(username||'GV').split(/[.\s]/).filter(Boolean).slice(0,2).map(function(s){return s[0].toUpperCase();}).join('')||'GV';
@@ -3533,14 +3325,17 @@ window._mgcI3 = function(username, fId) {
 };
 })();</script>
 <script>(function(){
-let fornitoreId='forn001';
+// ── SESSIONE ───────────────────────────────────────────────
+const sess=JSON.parse(sessionStorage.getItem('mgc-session')||'{}');
+if(!sess.username){ location.href='index.html'; }
+const fornitoreId=sess.fornitoreId||sess.username;
 
 function getData(){try{return JSON.parse(localStorage.getItem('mgc-app-v1'))||{fornitori:[],appuntamenti:[]}}catch(e){return{fornitori:[],appuntamenti:[]}}}
 function saveData(d){try{localStorage.setItem('mgc-app-v1',JSON.stringify(d));}catch(e){}}
 
 let mioFornitore={nome:'',id:''};
 
-function logout(){if(typeof MGC!=='undefined'){MGC.hideApp();}else{sessionStorage.clear();location.href='index.html';}}
+function logout(){ if(typeof MGC!=="undefined"){ MGC.hideApp(); } else { location.href="index.html"; } }
 function pad(n){return n.toString().padStart(2,'0');}
 function toDS(d){return`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;}
 function addDays(s,n){const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return toDS(d);}
@@ -3575,10 +3370,10 @@ function showToast(msg,kind='verde'){
 
 // ── NAVIGAZIONE ────────────────────────────────────────────
 let currentView='home';
-document.querySelectorAll('.bn[data-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+document.querySelectorAll('#layer-l4 .bn-btn').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
 function switchView(v){
   currentView=v;
-  document.querySelectorAll('.bn[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+  document.querySelectorAll('#layer-l4 .bn-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+v).classList.add('active');
   if(v==='home') renderHome();
@@ -3925,14 +3720,14 @@ function renderRitardo(){
 
   document.getElementById('btn-geo')?.addEventListener('click',()=>{
     if(!navigator.geolocation){ alert('Geolocalizzazione non disponibile su questo dispositivo.'); return; }
-    (document.getElementById('geo-pos-txt') || {}).textContent = 'Rilevamento in corso…';
+    document.getElementById('geo-pos-txt').textContent='Rilevamento in corso…';
     navigator.geolocation.getCurrentPosition(pos=>{
       geoPos={lat:pos.coords.latitude.toFixed(5),lon:pos.coords.longitude.toFixed(5),acc:Math.round(pos.coords.accuracy)};
-      (document.getElementById('geo-pos-txt') || {}).textContent = `📍 ${geoPos.lat}, ${geoPos.lon} (±${geoPos.acc}m)`;
-      (document.getElementById('btn-geo') || {}).textContent = '✓ Posizione rilevata';
+      document.getElementById('geo-pos-txt').textContent=`📍 ${geoPos.lat}, ${geoPos.lon} (±${geoPos.acc}m)`;
+      document.getElementById('btn-geo').textContent='✓ Posizione rilevata';
       document.getElementById('btn-geo').style.color='var(--verde)';
     },err=>{
-      (document.getElementById('geo-pos-txt') || {}).textContent = 'Impossibile rilevare la posizione.';
+      document.getElementById('geo-pos-txt').textContent='Impossibile rilevare la posizione.';
     });
   });
 }
@@ -3950,8 +3745,8 @@ function segnaRitardo(appt,minuti){
 }
 
 // ── INIT ──────────────────────────────────────────────────
-window._mgcI4 = function(username, fId) {
-  fornitoreId=fId||username||'forn001';
+window._mgcI4 = function(username, fornitoreId_in) {
+  fornitoreId = fornitoreId_in || username || 'forn01';
   var D=getData();
   mioFornitore=D.fornitori.find(function(f){return f.id===fornitoreId;})||{nome:username||fornitoreId,id:fornitoreId};
   var av=document.getElementById('top-av'); if(av) av.textContent=(mioFornitore.nome||'F').slice(0,2).toUpperCase();
