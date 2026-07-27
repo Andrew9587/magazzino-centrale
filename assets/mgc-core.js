@@ -115,10 +115,14 @@
   /* =========================================================
      STORE — una sola chiave localStorage per tutti i livelli
      ========================================================= */
-  var STORAGE_KEY   = 'mgc-data-v2';
-  var LEGACY_KEYS   = ['mgc-l2-v1', 'mgc-app-v1'];
+  var STORAGE_KEY   = 'mgc-data-v3';
+  /* Vecchie chiavi del file singolo: NON vengono più importate.
+     Contenevano dati corrotti (il vecchio init riscriveva gli appuntamenti
+     di oggi ad ogni caricamento, accumulando decine di sovrapposizioni).
+     Vengono solo rimosse per liberare spazio. */
+  var LEGACY_KEYS   = ['mgc-l2-v1', 'mgc-app-v1', 'mgc-data-v2'];
   var MAX_LOG       = 80;
-  var DATA_VERSION  = '2.0.0';
+  var DATA_VERSION  = '2.2.0';
 
   function generaDatiDemo(opts) {
     opts = opts || {};
@@ -192,7 +196,46 @@
     };
   }
 
-  /* Normalizza dati vecchi (chiavi v1) al formato corrente */
+  /* ---------------------------------------------------------
+     REGOLA FONDAMENTALE DEL MAGAZZINO
+     Il magazzino è uno solo: una baia, uno slot da 30 minuti,
+     un movimento alla volta. Un appuntamento "eccezionale" dura
+     60 minuti e quindi occupa DUE slot consecutivi.
+     Questa funzione fa rispettare la regola ai dati salvati:
+     se trova appuntamenti sovrapposti sullo stesso slot tiene il
+     primo (in ordine di orario) e scarta gli altri.
+     --------------------------------------------------------- */
+  function riparaAppuntamenti(data) {
+    var perGiorno = {};
+    var tenuti = [];
+    var scartati = 0;
+
+    var lista = data.appuntamenti.slice().sort(function (a, b) {
+      return (a.data + (a.oraOriginale || a.ora)).localeCompare(b.data + (b.oraOriginale || b.ora));
+    });
+
+    lista.forEach(function (a) {
+      if (!a.oraOriginale) a.oraOriginale = a.ora;
+      if (!a.ora) a.ora = a.oraOriginale;
+      if (typeof a.ritardoMin !== 'number') a.ritardoMin = 0;
+
+      if (a.stato !== 'confermato') { tenuti.push(a); return; }
+
+      var giorno = perGiorno[a.data] || (perGiorno[a.data] = []);
+      var occupati = orariOccupatiDaAppuntamento(a);
+      var libero = occupati.every(function (o) { return slotEffettivamenteLibero(giorno, o); });
+
+      if (!libero) { scartati++; return; }
+
+      giorno.push(a);
+      tenuti.push(a);
+    });
+
+    data.appuntamenti = tenuti;
+    return scartati;
+  }
+
+  /* Normalizza e ripara i dati salvati */
   function normalizza(data) {
     if (!data || !Array.isArray(data.fornitori)) return null;
     if (!Array.isArray(data.appuntamenti)) data.appuntamenti = [];
@@ -202,22 +245,33 @@
       if (!f.password) f.password = 'f' + pad(i + 1) + 'pass';
       if (!f.email) f.email = 'fornitore' + pad(i + 1) + '@fornitori-demo.it';
     });
+
+    var scartati = riparaAppuntamenti(data);
+    if (scartati > 0) {
+      console.warn('MGC: rimossi ' + scartati + ' appuntamenti sovrapposti (uno slot = un movimento).');
+      data.registro.unshift({
+        id: uid('log'), tipo: 'info',
+        testo: 'Pulizia dati: rimossi ' + scartati + ' appuntamenti sovrapposti allo stesso slot.',
+        meta: new Date().toISOString(), notifica: false
+      });
+    }
+
     data._version = DATA_VERSION;
     return data;
   }
 
+  /* Rimuove le vecchie chiavi: i dati del file singolo non sono recuperabili */
+  function pulisciChiaviVecchie() {
+    LEGACY_KEYS.forEach(function (k) {
+      try { localStorage.removeItem(k); } catch (e) {}
+    });
+  }
+
   function load() {
     try {
+      pulisciChiaviVecchie();
       var raw = localStorage.getItem(STORAGE_KEY);
       if (raw) return normalizza(JSON.parse(raw));
-      /* migrazione dalle vecchie chiavi del file singolo */
-      for (var i = 0; i < LEGACY_KEYS.length; i++) {
-        var old = localStorage.getItem(LEGACY_KEYS[i]);
-        if (old) {
-          var d = normalizza(JSON.parse(old));
-          if (d) { save(d); return d; }
-        }
-      }
     } catch (e) {
       console.warn('MGC: dati locali non leggibili, si riparte dai dati demo.', e);
     }
