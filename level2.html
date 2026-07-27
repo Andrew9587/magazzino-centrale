@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Magazzino Centrale — L2 Operatore</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#10243F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mgc-theme.css">
+<link rel="stylesheet" href="assets/level2.css">
+</head>
+<body>
+
+<!-- ===================== APP L2 ===================== -->
+<div id="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-brand">
+        <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="txt"><div class="l1">MAGAZZINO<br>CENTRALE</div><div class="l2">Gestione Fornitori</div></div>
+      </div>
+      <div class="sidebar-level"><span class="dot"></span><div class="lvl-txt">LIVELLO 2 — MAGAZZINO<small>Accesso operativo completo</small></div></div>
+      <div class="sidebar-level" style="margin-top:8px;"><span class="dot" id="storage-dot"></span><div class="lvl-txt" id="storage-txt">Salvataggio attivo<small id="storage-sub">Dati salvati su questo dispositivo</small></div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Operazioni</div>
+      <button class="sb-nav-item active" data-view="agenda">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span>Agenda Giornaliera</span>
+      </button>
+      <button class="sb-nav-item" data-view="elenco">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        <span>Elenco Appuntamenti</span><span class="sb-badge" id="sb-badge-tot">0</span>
+      </button>
+      <button class="sb-nav-item" data-view="fornitori">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Anagrafica Fornitori</span>
+      </button>
+      <button class="sb-nav-item" data-view="chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Chat Fornitori</span><span class="sb-badge" id="sb-badge-chat" style="display:none;">0</span>
+      </button>
+      <button class="sb-nav-item" data-view="registro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+        <span>Registro Notifiche</span><span class="sb-badge" id="sb-badge-log">0</span>
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sb-user-chip"><div class="avatar" id="sb-user-avatar">MR</div><div class="info"><div class="name" id="sb-user-name">m.rossi</div><div class="role">Operatore Magazzino</div></div></div>
+      <button class="sb-logout" id="sb-logout-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg><span>Esci dal sistema</span></button>
+    </div>
+  </aside>
+
+  <div class="topbar">
+    <div class="topbar-id">
+      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="txt"><div class="l1">Magazzino Centrale</div><div class="l2">Livello 2</div></div>
+    </div>
+    <div class="avatar-top" id="user-avatar-mobile">MR</div>
+  </div>
+  <div class="status-strip"><span class="dot"></span><span>Salvataggio attivo su questo dispositivo</span></div>
+
+  <main class="main">
+
+    <section class="page active" id="page-agenda">
+      <div class="page-head">
+        <div><h1>Agenda Giornaliera</h1><div class="sub">Visione operativa del flusso carico/scarico</div></div>
+        <button class="btn-new-appt desktop-only" id="btn-nuovo-desktop" style="width:auto; padding:11px 18px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 5v14M5 12h14"/></svg>
+          Nuovo appuntamento
+        </button>
+      </div>
+      <div class="page-head-action mobile-only">
+        <button class="btn-new-appt" id="fab-nuovo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 5v14M5 12h14"/></svg>
+          Nuovo appuntamento
+        </button>
+      </div>
+      <div class="content">
+        <div id="banner-container"></div>
+        <div class="stats-grid" id="stats-grid"></div>
+        <div class="day-nav">
+          <button id="btn-prev-day" aria-label="Giorno precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="day-info" id="day-nav-label-wrap">
+            <div class="d1" id="day-nav-d1">—</div>
+            <div class="d2" id="day-nav-d2">—</div>
+            <input type="date" id="agenda-date-picker" aria-label="Seleziona data">
+          </div>
+          <button id="btn-cal-toggle" aria-label="Apri calendario" style="width:34px;height:34px;border-radius:8px;border:1.5px solid var(--ardesia-100);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--blu-800);flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </button>
+          <button id="btn-next-day" aria-label="Giorno successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg></button>
+          <button class="btn-today-chip" id="btn-today">Oggi</button>
+        </div>
+        <div id="agenda-slots"></div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-swatch" style="background:#fff;border:1.5px dashed var(--ardesia-300)"></span>Libera</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--blu-100)"></span>Occupata</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--ambra-bg);border:1.5px solid #F1DEB0"></span>In ritardo</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:#FBF6E8;border:1.5px solid var(--oro)"></span>Eccezionale</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-elenco">
+      <div class="page-head"><div><h1>Elenco Appuntamenti</h1><div class="sub" id="elenco-sub">Tutti gli appuntamenti pianificati</div></div></div>
+      <div class="content"><div class="panel" id="elenco-panel"></div></div>
+    </section>
+
+    <section class="page" id="page-fornitori">
+      <div class="page-head"><div><h1>Anagrafica Fornitori</h1><div class="sub" id="fornitori-sub">Fornitori abilitati al sistema</div></div></div>
+      <div class="content"><div class="panel" id="fornitori-panel"></div></div>
+    </section>
+
+    <section class="page" id="page-registro">
+      <div class="page-head"><div><h1>Registro Notifiche</h1><div class="sub">Storico delle operazioni e delle notifiche inviate</div></div></div>
+      <div class="content"><div class="panel" id="registro-panel"></div></div>
+    </section>
+
+    <section class="page" id="page-chat">
+      <div class="page-head">
+        <div><h1>Chat Fornitori</h1><div class="sub" id="chat-sub">Comunicazioni dirette con i fornitori</div></div>
+      </div>
+      <div class="content" id="chat-content"></div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="bn-item active" data-view="agenda">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span class="bn-label">Agenda</span>
+    </button>
+    <button class="bn-item" data-view="elenco">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      <span class="bn-label">Elenco</span><span class="bn-badge" id="bn-badge-tot" style="display:none;">0</span>
+    </button>
+    <button class="bn-item" data-view="chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span class="bn-label">Chat</span><span class="bn-badge" id="bn-badge-chat" style="display:none;">0</span>
+    </button>
+    <button class="bn-item" data-view="registro">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+      <span class="bn-label">Registro</span><span class="bn-badge" id="bn-badge-log" style="display:none;">0</span>
+    </button>
+    <button class="bn-item" data-action="account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="bn-label">Profilo</span>
+    </button>
+  </nav>
+
+</div>
+
+<div class="toast-stack" id="toast-stack"></div>
+
+<div class="modal-overlay" id="modal-dettaglio">
+  <div class="modal">
+    <div class="modal-grabber"></div>
+    <div class="modal-head">
+      <h3>Dettaglio Appuntamento</h3>
+      <button class="modal-close" data-close="modal-dettaglio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body" id="dettaglio-body"></div>
+    <div class="modal-foot" id="dettaglio-foot"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-account">
+  <div class="modal">
+    <div class="modal-grabber"></div>
+    <div class="modal-head"><h3>Profilo operatore</h3><button class="modal-close" data-close="modal-account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body" id="account-sheet">
+      <div class="sheet-user">
+        <div class="av" id="account-avatar">MR</div>
+        <div class="info"><div class="name" id="account-name">m.rossi</div><div class="role">Operatore Magazzino · Livello 2</div></div>
+      </div>
+      <div class="confirm-box">
+        <div class="t"><span style="width:8px;height:8px;border-radius:50%;background:#5FD08A;display:inline-block;"></span>&nbsp;Salvataggio attivo</div>
+        <div class="s">Dati salvati su questo dispositivo, persistenti tra una sessione e l'altra.</div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-danger" id="logout-btn-mobile">Esci dal sistema</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-nuovo">
+  <div class="modal">
+    <div class="modal-grabber"></div>
+    <div class="modal-head"><h3>Nuovo Appuntamento</h3><button class="modal-close" data-close="modal-nuovo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="confirm-box" id="nf-riepilogo">
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span id="nf-riepilogo-testo">Inserimento manuale</span></div>
+        <div class="s">L'appuntamento creato sarà notificato automaticamente al fornitore selezionato.</div>
+      </div>
+      <div class="form-row"><label for="nf-fornitore">Fornitore</label><select id="nf-fornitore"></select></div>
+      <div class="form-grid-2">
+        <div class="form-row"><label for="nf-data">Data</label><input type="date" id="nf-data"></div>
+        <div class="form-row"><label for="nf-ora">Orario</label><select id="nf-ora"></select></div>
+      </div>
+      <div class="form-row">
+        <label for="nf-tipo">Tipo movimento</label>
+        <select id="nf-tipo">
+          <option value="carico">Carico merce</option>
+          <option value="scarico">Scarico merce</option>
+          <option value="entrambi">Carico e scarico</option>
+          <option value="eccezionale">Carico/scarico eccezionale (1h)</option>
+        </select>
+        <div class="pwd-error" id="nf-slot-error">Slot non disponibile.</div>
+      </div>
+      <div class="form-row" id="nf-pwd-row">
+        <label for="nf-pwd">Password di conferma operatore</label>
+        <input type="password" id="nf-pwd" placeholder="Richiesta per confermare l'operazione">
+        <div class="hint">Demo: usare <b>2580</b></div>
+        <div class="pwd-error" id="nf-pwd-error">Password di conferma errata.</div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-outline" data-close="modal-nuovo">Annulla</button><button class="btn btn-primary" id="nf-confirm">Conferma</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-cancella">
+  <div class="modal">
+    <div class="modal-grabber"></div>
+    <div class="modal-head"><h3>Cancellazione Appuntamento</h3><button class="modal-close" data-close="modal-cancella"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="confirm-box warn">
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>Operazione irreversibile</div>
+        <div class="s" id="cancella-desc">Stai per cancellare l'appuntamento.</div>
+      </div>
+      <div class="form-row">
+        <label for="ca-pwd">Password di conferma operatore</label>
+        <input type="password" id="ca-pwd" placeholder="Richiesta per confermare l'operazione">
+        <div class="hint">Demo: usare <b>2580</b></div>
+        <div class="pwd-error" id="ca-pwd-error">Password di conferma errata.</div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-outline" data-close="modal-cancella">Annulla</button><button class="btn btn-danger" id="ca-confirm">Confermo</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-ritardo">
+  <div class="modal">
+    <div class="modal-grabber"></div>
+    <div class="modal-head"><h3>Segnalazione Ritardo</h3><button class="modal-close" data-close="modal-ritardo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="confirm-box ambra">
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Effetto a cascata</div>
+        <div class="s" id="ritardo-desc">Il ritardo verrà applicato a questo appuntamento e ai successivi.</div>
+      </div>
+      <div class="form-row">
+        <label for="rt-minuti">Minuti di ritardo</label>
+        <select id="rt-minuti">
+          <option value="10">10 minuti</option>
+          <option value="15" selected>15 minuti</option>
+          <option value="20">20 minuti</option>
+          <option value="30">30 minuti</option>
+          <option value="45">45 minuti</option>
+          <option value="60">60 minuti</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-outline" data-close="modal-ritardo">Annulla</button><button class="btn btn-ambra" id="rt-confirm">Applica</button></div>
+  </div>
+</div>
+
+<script src="assets/mgc-core.js"></script>
+<script src="assets/level2.js"></script>
+</body>
+</html>
