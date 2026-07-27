@@ -270,7 +270,7 @@
     0: { u: 'dev',       pw: 'dev0000', nome: 'L0 — Sviluppatore',        page: 'level0.html', attivo: false },
     1: { u: 'direttore', pw: 'dir1111', nome: 'L1 — Gestore / Capo Area', page: 'level1.html', attivo: false },
     2: { u: 'm.rossi',   pw: 'mag2222', nome: 'L2 — Operatore Magazzino', page: 'level2.html', attivo: true  },
-    3: { u: 'guardiola', pw: 'grd3333', nome: 'L3 — Guardiola',           page: 'level3.html', attivo: false },
+    3: { u: 'guardiola', pw: 'grd3333', nome: 'L3 — Guardiola',           page: 'level3.html', attivo: true  },
     4: { u: 'forn01',    pw: 'f01pass', nome: 'L4 — Fornitore',           page: 'level4.html', attivo: false }
   };
 

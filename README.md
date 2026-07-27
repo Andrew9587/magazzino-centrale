@@ -1,4 +1,4 @@
-# Magazzino Centrale — v2.0.0 (architettura a file separati)
+# Magazzino Centrale — v2.1.0 (architettura a file separati)
 
 Ripartenza dal **L2 funzionante**, spacchettato in file separati come da Opzione A
 del documento di sviluppo. Nessun layer sovrapposto, nessun ID duplicato.
@@ -8,11 +8,14 @@ del documento di sviluppo. Nessun layer sovrapposto, nessun ID duplicato.
 ```
 index.html            Login + routing (unico punto di ingresso)
 level2.html           L2 — Operatore Magazzino  ✅ funzionante
+level3.html           L3 — Guardiola            ✅ funzionante
 assets/
   mgc-core.js         Libreria condivisa: Utils, Store, Auth, Session
   mgc-theme.css       Variabili colore, reset, stili del login  (comune a tutti)
   level2.css          Stili specifici del L2 (estratti 1:1 dall'originale)
   level2.js           Logica del L2 (estratta 1:1, IIFE)
+  level3.css          Stili del L3
+  level3.js           Logica del L3 (sola lettura)
 ```
 
 Il L2 è **identico** all'originale: CSS e JS sono stati estratti senza ritocchi.
@@ -106,7 +109,22 @@ via server (GitHub Pages va benissimo).
 | L0 | `dev` | `dev0000` | da migrare |
 | L1 | `direttore` | `dir1111` | da migrare |
 | **L2** | **`m.rossi`** | **`mag2222`** | **attivo** |
-| L3 | `guardiola` | `grd3333` | da migrare |
+| **L3** | **`guardiola`** | **`grd3333`** | **attivo** |
 | L4 | `forn01`…`forn25` | `f01pass`…`f25pass` | da migrare |
 
 Password di conferma operazioni dentro il L2: `2580`.
+
+## L3 — Guardiola (v2.1.0)
+
+Sola lettura, pensato per il presidio all'ingresso.
+
+- **Oggi** — ingressi del giorno divisi in mattina e pomeriggio, con navigazione
+  fra i giorni; card *Prossimo in arrivo* con l'appuntamento successivo all'ora
+  corrente; gli orari già passati sono attenuati; ritardi evidenziati in ambra
+  (mostra sia l'orario originale sia quello aggiornato).
+- **Cerca** — ricerca per nome fornitore *o* per referente (da 2 lettere in su),
+  con il prossimo ingresso in programma e la scheda dei successivi.
+- Toccando una riga si apre il dettaglio con referente, telefono e un pulsante
+  **Chiama** (`tel:`) — utile dal telefono in guardiola.
+- La pagina si aggiorna da sola ogni 60 secondi, perché resta aperta tutto il
+  giorno: recepisce i ritardi e i nuovi appuntamenti inseriti dal L2.
